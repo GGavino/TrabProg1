@@ -26,6 +26,7 @@ int carregarclientes(CLIENTE clientes[],int *tot){
     fread(clientes,sizeof(CLIENTE), *tot,fp);
 }
 
+
 int guardarimoveis(IMOVEL imoveis[],int tot){
     FILE *fp;
     ALUGUELD aluguelinfo;

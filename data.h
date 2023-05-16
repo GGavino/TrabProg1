@@ -30,4 +30,5 @@ int carregarclientes(CLIENTE clientes[],int *tot);
 int guardarimoveis(IMOVEL imoveis[],int tot);
 int carregarimoveis(IMOVEL imoveis[],int *tot);
 void AdicionarNovoAlugel(IMOVEL imoveis[], ALUGUELD info, int id);
+
 #endif

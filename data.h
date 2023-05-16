@@ -8,15 +8,14 @@ typedef struct AluguelData{
 typedef struct AluguelElem{
     
     ALUGUELD data;
-    struct AluguelElem *proximo;
-    struct AluguelElem *anterior;
+    struct AluguelElem *proximo,*anterior;
 
 } AluguelList;
 
 typedef struct Imovel {
     char tipo[50],morada[100],cidade[50],freguesia[50],energiaclass[5];
-    int area,banheiros,ano,valaluguel,ativo,id;
-    AluguelList aluguel;
+    int area,banheiros,ano,valaluguel,ativo,id,totalugueis=0;
+    AluguelList *alugueis;
 
 } IMOVEL;
 
@@ -28,4 +27,7 @@ typedef struct Cliente {
 
 int guardarclientes(CLIENTE clientes[],int tot);
 int carregarclientes(CLIENTE clientes[],int *tot);
+int guardarimoveis(IMOVEL imoveis[],int tot);
+int carregarimoveis(IMOVEL imoveis[],int *tot);
+void AdicionarNovoAlugel(IMOVEL imoveis[], ALUGUELD info, int id);
 #endif

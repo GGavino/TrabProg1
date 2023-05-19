@@ -39,9 +39,8 @@ int guardarimoveis(IMOVEL imoveis[],int tot){
     fwrite(&tot,sizeof(int),1,fp);
     for(int i=0;i<tot;i++){
         fwrite(&imoveis[i],sizeof(IMOVEL),1,fp);
-        aluguellista = imoveis[i].alugueis;
-        aluguelinfo=aluguellista->data;
-        for(int j=0;j<imoveis[i].totalugueis;j++){
+        for(aluguellista = imoveis[i].alugueis; aluguellista != NULL; aluguellista=aluguellista->proximo) {
+            aluguelinfo=aluguellista->data;
             fwrite(&aluguelinfo,sizeof(ALUGUELD),1,fp);
         }
     }
@@ -82,10 +81,10 @@ void AdicionarNovoAlugel(IMOVEL imoveis[], ALUGUELD info, int id){
         while (current->proximo != NULL && (12*info.anoini + info.mesini + info.diaini / 100) < (12*current->data.anoini + current->data.mesini + current->data.diaini / 100)) {
             current = current->proximo;
         }
-        current->anterior = newAluguel;
         newAluguel->proximo = current;
         newAluguel->anterior= current->anterior->anterior;
         current->anterior->proximo = newAluguel;
+        current->anterior = newAluguel;
     }
 
     imoveis[id].totalugueis++;

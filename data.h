@@ -14,7 +14,7 @@ typedef struct AluguelElem{
 
 typedef struct Imovel {
     char tipo[50],morada[100],cidade[50],freguesia[50],energiaclass[5];
-    int area,banheiros,ano,valaluguel,ativo,id,totalugueis=0;
+    int area,banheiros,ano,valaluguel,ativo,id,totalugueis;
     AluguelList *alugueis;
 
 } IMOVEL;

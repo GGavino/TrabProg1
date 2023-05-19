@@ -82,7 +82,7 @@ void AdicionarNovoAlugel(IMOVEL imoveis[], ALUGUELD info, int id){
             current = current->proximo;
         }
         newAluguel->proximo = current;
-        newAluguel->anterior= current->anterior->anterior;
+        newAluguel->anterior= current->anterior;
         current->anterior->proximo = newAluguel;
         current->anterior = newAluguel;
     }

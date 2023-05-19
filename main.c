@@ -1,11 +1,6 @@
-#include <string.h>
 #include "menu.h"
 #include "data.h"
 #include "clientes.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <locale.h>
-#include <ctype.h>
 
 int main (int argc, char *argv[]) {
     int op=0,numimoveis=0,numclientes=0;

@@ -7,14 +7,14 @@ int AdicionarCliente(CLIENTE clientes[], int tot){
     char res;
     printf("Qual o nome do cliente?\n");fflush(stdin); gets(clientes[tot].nome); printf("%s\n",clientes[tot].nome);
     printf("Qual a morada do cliente?\n");fflush(stdin); gets(clientes[tot].morada); printf("%s\n",clientes[tot].morada);
-    printf("De qual pais o cliente e?\n");fflush(stdin); gets(clientes[tot].pais); printf("%s\n",clientes[tot].pais);
+    printf("De qual país o cliente e?\n");fflush(stdin); gets(clientes[tot].pais); printf("%s\n",clientes[tot].pais);
     do{
         printf("Qual o nif do cliente?\n");fflush(stdin); gets(clientes[tot].nif); printf("%s\n",clientes[tot].nif);
         aux=0;
         for(i=0;i<tot && aux == 0;i++){
             if (clientes[tot].nif==clientes[i].nif){
                 aux=1;
-                printf("JÃ¡ existe um cliente com esse nif, por favor insira um nif diferente\n");
+                printf("Já existe um cliente com esse nif, por favor insira um nif diferente\n");
 
             }
         }
@@ -37,7 +37,7 @@ int AdicionarCliente(CLIENTE clientes[], int tot){
         for(i=0;i<tot && aux == 0;i++){
             if (clientes[tot].passaporte==clientes[i].passaporte){
                 aux=1;
-                printf("JÃ¡ existe um cliente com esse numero de passaporte, por favor insira um diferente\n");
+                printf("Já existe um cliente com esse numero de passaporte, por favor insira um diferente\n");
 
             }
         }
@@ -66,7 +66,7 @@ int AdicionarCliente(CLIENTE clientes[], int tot){
         for(i=0;i<tot && aux == 0;i++){
             if (clientes[tot].email==clientes[i].email){
                 aux=1;
-                printf("JÃ¡ existe um cliente com esse email, por favor insira um diferente");
+                printf("Já existe um cliente com esse email, por favor insira um diferente");
 
             }
         }
@@ -109,4 +109,25 @@ int AdicionarCliente(CLIENTE clientes[], int tot){
         }
         if(aux!=0) printf("\n\n");
     }while(aux!=0);
+}
+int listarClientes(CLIENTE clientes[],int tot){
+    char aux;
+    printf("\
+    ----------------------------------------\
+                Lista de Clientes\n\n\
+    ----------------------------------------\n\n\n");
+    for(int i=0;i<tot;i++){
+        printf("Clientes %d:\n\n");
+        printf("Nome: %s\n",clientes[i].nome);
+        printf("Nif: %s\n",clientes[i].nif);
+        printf("Passaporte: %s\n",clientes[i].passaporte);
+        printf("Morada: %s\n", clientes[i].morada);
+        printf("País: %s\n", clientes[i].pais);
+        printf("Email: %s\n", clientes[i].email);
+
+        printf("\n--------------------------------------------------\n\n\n");
+    }
+    printf("Digite qualquer coisa para voltar para o menu anterior\n");
+    scanf("%c",&aux);
+    return 1;
 }

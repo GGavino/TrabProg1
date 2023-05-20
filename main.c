@@ -1,14 +1,15 @@
 #include "menu.h"
 #include "data.h"
 #include "clientes.h"
+#include "imoveis.h"
 
 int main (int argc, char *argv[]) {
     int op=0,numimoveis=0,numclientes=0;
     CLIENTE clientes[500];
     IMOVEL imoveis[200];
-    setlocale(LC_ALL,"Portuguese");
+    setlocale(LC_ALL,"Portuguese_Brazil");
     carregarclientes(clientes, &numclientes);
-    // printf("Teste: ãçàá");
+    carregarimoveis(imoveis, &numimoveis);
     do{
         switch (op)
         {
@@ -32,6 +33,16 @@ int main (int argc, char *argv[]) {
         case 11:
             op=AdicionarCliente(clientes,numclientes);
             numclientes++;
+            break;
+        case 12:
+            op=listarClientes(clientes,numclientes);
+            break;
+        case 21:
+            op=AdicionarImoveis(imoveis,numimoveis);
+            numimoveis++;
+            break;
+        case 22:
+            op=listarImoveis(imoveis,numimoveis);
             break;
         default:
             

@@ -21,12 +21,12 @@ int menuini(){
         printf("\n3- Alugueis");
         printf("\n0- Sair");
         printf("\n------------------------------\n");
-        printf("\nOpcao: ");
+        printf("\nOpção: ");
         scanf("%d",&i);
         if(i<0 || i>3)
         {
             system("CLS");
-            printf("Opcao invalida");
+            printf("Opção invalida");
         }
     }
     return i;
@@ -47,12 +47,12 @@ int menuclientes(){
         printf("\n5- Filtrar Clientes");
         printf("\n0- Sair");
         printf("\n------------------------------\n");
-        printf("\nOpÃ§Ã£o: ");
+        printf("\nOpção: ");
         scanf("%d",&i);
         if(i<0 || i>5)
         {
             system("CLS"); 
-            printf("Opcao invalida");
+            printf("Opção invalida");
         }
     }
 
@@ -63,20 +63,20 @@ int menuclientes(){
 int menuimovel(){
     int i=100;
     while(i<0 || i>5){
-        titulo("Imoveis");
-        printf("\n\n1- Adcionar Imoveis");
-        printf("\n2- Excluir Imoveis");
-        printf("\n3- Alterar Imoveis");
-        printf("\n4- Listar Imoveis");
-        printf("\n5- Filtrar Imoveis");
+        titulo("Imóveis");
+        printf("\n\n1- Adcionar Imóveis");
+        printf("\n2- Excluir Imóveis");
+        printf("\n3- Alterar Imóveis");
+        printf("\n4- Listar Imóveis");
+        printf("\n5- Filtrar Imóveis");
         printf("\n0- Sair");
         printf("\n------------------------------\n");
-        printf("\nOpÃ§Ã£o: ");
+        printf("\nOpção: ");
         scanf("%d",&i);
         if(i<0 || i>5)
         {
             system("CLS");
-            printf("Opcao invalida");
+            printf("Opção invalida");
         }
     }
     return 20+i;

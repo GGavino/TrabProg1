@@ -3,8 +3,8 @@
 
 #include "data.h"
 
-int AdicionarImoveis(IMOVEL imovel[], int tot);
-
+int AdicionarImoveis(IMOVEL imoveis[], int tot);
+int listarImoveis(IMOVEL imoveis[],int tot);
 
 
 

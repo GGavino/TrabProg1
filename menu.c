@@ -81,3 +81,23 @@ int menuimovel(){
     }
     return 20+i;
 }
+int menuAluguel(){
+    int i=100;
+    while(i<0 || i>5){
+        titulo("Imóveis");
+        printf("\n\n1- Adcionar Aluguel");
+        printf("\n2- Listar Imóveis disponiveis");
+        printf("\n3- Listar Alugueis de um Imóvel");
+        printf("\n4- Listar Alugueis de todos os Imóveis");
+        printf("\n0- Sair");
+        printf("\n------------------------------\n");
+        printf("\nOpção: ");
+        scanf("%d",&i);
+        if(i<0 || i>5)
+        {
+            system("CLS");
+            printf("Opção invalida");
+        }
+    }
+    return 30+i;
+}

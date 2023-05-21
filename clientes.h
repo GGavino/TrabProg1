@@ -5,7 +5,8 @@
 
 
 int AdicionarCliente(CLIENTE clientes[], int tot);
-int listarClientes(CLIENTE clientes[],int tot);
+int listarTodosClientes(CLIENTE clientes[],int tot);
+void listarUmCliente(CLIENTE cliente);
 
 
 #endif 

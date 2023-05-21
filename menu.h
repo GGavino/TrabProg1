@@ -5,3 +5,5 @@ int menuini();
 int menuimovel();
 
 int menuclientes();
+
+int menuAluguel();

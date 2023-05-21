@@ -10,7 +10,7 @@
 
 
 typedef struct AluguelData{
-    int diaini,mesini,anoini,diafim,mesfim,anofim,clientid;
+    int diapag,mespag,anopag,diaini,mesini,anoini,diafim,mesfim,anofim,clientid;
     float valor;
 } ALUGUELD;
 
@@ -39,6 +39,7 @@ int guardarclientes(CLIENTE clientes[],int tot);
 int carregarclientes(CLIENTE clientes[],int *tot);
 int guardarimoveis(IMOVEL imoveis[],int tot);
 int carregarimoveis(IMOVEL imoveis[],int *tot);
-void AdicionarNovoAlugel(IMOVEL imoveis[], ALUGUELD info, int id);
+void AdicionarAlugelNaLista(IMOVEL imoveis[], ALUGUELD info, int id);
+void libertarAlugueis(IMOVEL imoveis[], int tot);   
 
 #endif

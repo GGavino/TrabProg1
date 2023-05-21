@@ -59,13 +59,13 @@ int carregarimoveis(IMOVEL imoveis[],int *tot){
         fread(&imoveis[i],sizeof(IMOVEL),1,fp);
         for(int j=0;j<imoveis[i].totalugueis;j++){
             fread(&aluguelinfo,sizeof(ALUGUELD),1,fp);
-            AdicionarNovoAlugel(imoveis, aluguelinfo, j);
+            AdicionarAlugelNaLista(imoveis, aluguelinfo, j);
         }
     }
     fclose(fp);
 }
 
-void AdicionarNovoAlugel(IMOVEL imoveis[], ALUGUELD info, int id){
+void AdicionarAlugelNaLista(IMOVEL imoveis[], ALUGUELD info, int id){
     AluguelList *newAluguel = (AluguelList*)calloc(1,sizeof(AluguelList));
     newAluguel->data = info;
     newAluguel->proximo = NULL;
@@ -89,4 +89,15 @@ void AdicionarNovoAlugel(IMOVEL imoveis[], ALUGUELD info, int id){
 
     imoveis[id].totalugueis++;
 }
+void libertarAlugueis(IMOVEL imoveis[], int tot){
+    AluguelList *aux=NULL,*aux2=NULL;
+    
+    for(int i=0;i<tot;i++){
+        for(aux = imoveis[i].alugueis; aux != NULL; aux=aux->proximo) {
+            if(aux2!=NULL) free(aux2);
+            if(aux->anterior!=NULL) aux2 = aux;
+        }
+        free(aux2->proximo);
+    }
 
+}

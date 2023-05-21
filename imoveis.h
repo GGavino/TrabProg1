@@ -4,9 +4,7 @@
 #include "data.h"
 
 int AdicionarImoveis(IMOVEL imoveis[], int tot);
-int listarImoveis(IMOVEL imoveis[],int tot);
-
-
-
+int listarTodosImoveis(IMOVEL imoveis[],int tot);
+void listarUmImovel(IMOVEL imovel);
 
 #endif

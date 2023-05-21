@@ -2,6 +2,7 @@
 #include "data.h"
 #include "clientes.h"
 #include "imoveis.h"
+#include "alugueis.h"
 
 int main (int argc, char *argv[]) {
     int op=0,numimoveis=0,numclientes=0;
@@ -28,21 +29,24 @@ int main (int argc, char *argv[]) {
             break;
 
         case 3:
-
+            op=menuAluguel();
             break;
         case 11:
             op=AdicionarCliente(clientes,numclientes);
             numclientes++;
             break;
         case 12:
-            op=listarClientes(clientes,numclientes);
+            op=listarTodosClientes(clientes,numclientes);
             break;
         case 21:
             op=AdicionarImoveis(imoveis,numimoveis);
             numimoveis++;
             break;
         case 22:
-            op=listarImoveis(imoveis,numimoveis);
+            op=listarTodosImoveis(imoveis,numimoveis);
+            break;
+        case 31:
+            op= AdicionarAluguel(imoveis,numimoveis);
             break;
         default:
             
@@ -50,5 +54,8 @@ int main (int argc, char *argv[]) {
         }
         
     } while(op!=0);
+    guardarclientes(clientes, numclientes);
+    guardarimoveis(imoveis, numimoveis);
+    libertarAlugueis(imoveis, numimoveis);
     return 0;
 }

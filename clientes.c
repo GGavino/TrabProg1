@@ -62,7 +62,7 @@ int AdicionarCliente(CLIENTE clientes[], int tot){
     do{
         printf("Qual o email do cliente?\n");fflush(stdin); gets(clientes[tot].email); printf("%s\n",clientes[tot].email);
         aux=0;
-        dotcount=0,acount=0;
+        dotcount=0,acount=0,dotpos=-1,atpos=-1;
         for(i=0;i<tot && aux == 0;i++){
             if (clientes[tot].email==clientes[i].email){
                 aux=1;
@@ -88,7 +88,7 @@ int AdicionarCliente(CLIENTE clientes[], int tot){
         } else if (dotcount==0 || acount!=1){
             printf("O email deve ter exatamente um '@' e pelo menos 1 '.'");
             aux=1;
-        } else if(dotpos==atpos+1 || dotpos>atpos){
+        } else if(dotpos==atpos+1 || dotpos<atpos){
             printf("Deve have pelo menos um caracter entre o '@' e o '.' e deve haver 1 '.' depois do '@'");
             aux=1;
         }
@@ -110,24 +110,28 @@ int AdicionarCliente(CLIENTE clientes[], int tot){
         if(aux!=0) printf("\n\n");
     }while(aux!=0);
 }
-int listarClientes(CLIENTE clientes[],int tot){
+int listarTodosClientes(CLIENTE clientes[],int tot){
     char aux;
     printf("\
     ----------------------------------------\
                 Lista de Clientes\n\n\
     ----------------------------------------\n\n\n");
     for(int i=0;i<tot;i++){
-        printf("Clientes %d:\n\n");
-        printf("Nome: %s\n",clientes[i].nome);
-        printf("Nif: %s\n",clientes[i].nif);
-        printf("Passaporte: %s\n",clientes[i].passaporte);
-        printf("Morada: %s\n", clientes[i].morada);
-        printf("País: %s\n", clientes[i].pais);
-        printf("Email: %s\n", clientes[i].email);
-
-        printf("\n--------------------------------------------------\n\n\n");
+       listarUmCliente(clientes[i]);
     }
     printf("Digite qualquer coisa para voltar para o menu anterior\n");
     scanf("%c",&aux);
     return 1;
+}
+
+void listarUmCliente(CLIENTE cliente){
+
+    printf("Clientes %d:\n\n");
+    printf("Nome: %s\n",cliente.nome);
+    printf("Nif: %s\n",cliente.nif);
+    printf("Passaporte: %s\n",cliente.passaporte);
+    printf("Morada: %s\n", cliente.morada);
+    printf("País: %s\n", cliente.pais);
+    printf("Email: %s\n", cliente.email);
+    printf("\n--------------------------------------------------\n\n\n");
 }

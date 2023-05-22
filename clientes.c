@@ -117,7 +117,7 @@ int AdicionarCliente(CLIENTE clientes[], int tot){
         }
         if(aux!=0) printf("\n\n");
     } while(aux!=0);
-    clientes[tot].id=tot;
+    clientes[tot].id=tot+1;
     do{
         aux=0;
         printf("\n\nDeseja inserir outro cliente?\n");
@@ -136,26 +136,28 @@ int AdicionarCliente(CLIENTE clientes[], int tot){
 }
 int listarTodosClientes(CLIENTE clientes[],int tot){
     char aux;
-    printf("\
-    ----------------------------------------\
+    printf("\n\n\
+    ----------------------------------------\n\
                 Lista de Clientes\n\n\
     ----------------------------------------\n\n\n");
     for(int i=0;i<tot;i++){
-       listarUmCliente(clientes[i]);
+       listarUmCliente(clientes,i);
     }
     printf("Digite qualquer coisa para voltar para o menu anterior\n");
+    fflush(stdin);
     scanf("%c",&aux);
     return 1;
 }
 
-void listarUmCliente(CLIENTE cliente){
+void listarUmCliente(CLIENTE clientes[],int id){
 
-    printf("Clientes %d:\n\n");
-    printf("Nome: %s\n",cliente.nome);
-    printf("Nif: %s\n",cliente.nif);
-    printf("Passaporte: %s\n",cliente.passaporte);
-    printf("Morada: %s\n", cliente.morada);
-    printf("País: %s\n", cliente.pais);
-    printf("Email: %s\n", cliente.email);
+    printf("Cliente %d:\n\n", clientes[id].id);
+    printf("Nome: %s\n",clientes[id].nome);
+    printf("Nif: %s\n",clientes[id].nif);
+    printf("Numero de telefone: %s\n",clientes[id].telefone);
+    printf("Passaporte: %s\n",clientes[id].passaporte);
+    printf("Morada: %s\n", clientes[id].morada);
+    printf("País: %s\n", clientes[id].pais);
+    printf("Email: %s\n", clientes[id].email);
     printf("\n--------------------------------------------------\n\n\n");
 }

@@ -35,14 +35,14 @@ int main (int argc, char *argv[]) {
             op=AdicionarCliente(clientes,numclientes);
             numclientes++;
             break;
-        case 12:
+        case 14:
             op=listarTodosClientes(clientes,numclientes);
             break;
         case 21:
             op=AdicionarImoveis(imoveis,numimoveis);
             numimoveis++;
             break;
-        case 22:
+        case 24:
             op=listarTodosImoveis(imoveis,numimoveis);
             break;
         case 31:

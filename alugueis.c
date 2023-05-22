@@ -3,8 +3,9 @@
 
 int AdicionarAluguel(IMOVEL imoveis[], int tot){
     ALUGUELD aux;
+    AluguelList *aux2;
     char auxchar;
-    int res;
+    int res,passou,repetido;
     int id=0;
     do{
         res=printf("Qual o id do Imóvel a qual este aluguel pertence?\n");scanf("%d",&id);
@@ -12,14 +13,29 @@ int AdicionarAluguel(IMOVEL imoveis[], int tot){
     do{
         res=printf("Qual a data de inicio do aluguel?[dd/mm/aaaa]\n");scanf("%d/%d/%d",&aux.diaini,&aux.mesini,&aux.anoini);
         if(res != 3) printf("Resposta invalida\n\n");
+        passou=0,repetido=0;
+        for(aux2=imoveis[id].alugueis; aux2 != NULL && passou == 0 && repetido == 0; aux2 = aux2->proximo){
+            if(comparardatas(aux2->data.diaini,aux2->data.mesini,aux2->data.anoini,aux.diaini,aux.mesini,aux.anoini) < 0 && comparardatas(aux2->data.diaini,aux2->data.mesini,aux2->data.anoini,aux.diafim,aux.mesfim,aux.anofim) < 0 ){
+                repetido = 1;
+            } else if(comparardatas(aux2->data.diaini,aux2->data.mesini,aux2->data.anoini,aux.diaini,aux.mesini,aux.anoini) > 0){
+                passou = 1;
+            }
+        }
         if(validardata(aux.diaini,aux.mesini,aux.anoini)) printf("Data invalida\n\n");
-    }while(res!=3 || validardata(aux.diaini,aux.mesini,aux.anoini));// verifica se a data inicial foi lida de maneira correta e se a mesma é valida
+    }while(res!=3 || validardata(aux.diaini,aux.mesini,aux.anoini) || repetido == 1);// verifica se a data inicial foi lida de maneira correta e se a mesma é valida
 
     do{
         res=printf("Qual a data de fim do aluguel?[dd/mm/aaaa]\n");scanf("%d/%d/%d",&aux.diaini,&aux.mesini,&aux.anoini);
         if(res != 3) printf("Resposta invalida\n\n");
         if(validardata(aux.diafim,aux.mesfim,aux.anofim)) printf("Data invalida\n\n");
         if(comparardatas(aux.diaini,aux.mesini,aux.anoini,aux.diafim,aux.mesfim,aux.anofim) > -7) printf("O aluguel deve ser de pelo menos 7 dias\n\n");
+        for(aux2=imoveis[id].alugueis; aux2 != NULL && passou == 0 && repetido == 0; aux2 = aux2->proximo){
+            if(comparardatas(aux2->data.diaini,aux2->data.mesini,aux2->data.anoini,aux.diafim,aux.mesfim,aux.anofim) < 0 && comparardatas(aux2->data.diaini,aux2->data.mesini,aux2->data.anoini,aux.diafim,aux.mesfim,aux.anofim) < 0 ){
+                repetido = 1;
+            } else if(comparardatas(aux2->data.diaini,aux2->data.mesini,aux2->data.anoini,aux.diafim,aux.mesfim,aux.anofim) > 0){
+                passou = 1;
+            }
+        }
     }while(res!=3 || validardata(aux.diafim,aux.mesfim,aux.anofim) || comparardatas(aux.diaini,aux.mesini,aux.anoini,aux.diafim,aux.mesfim,aux.anofim) > -7);// verifica se a data final foi lida de maneira correta e se a mesma é valida
     do{
         res=printf("Qual a data de fim do aluguel?[dd/mm/aaaa]\n");scanf("%d/%d/%d",&aux.diapag,&aux.mespag,&aux.anopag);

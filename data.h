@@ -22,7 +22,7 @@ typedef struct AluguelElem{
 } AluguelList;
 
 typedef struct Imovel {
-    char tipo[5],morada[100],cidade[50],freguesia[50],energiaclass[5],observacao[100];
+    char tipo[50],morada[100],cidade[50],freguesia[50],energiaclass[50],observacao[100];
     int area,banheiros,ano,ativo,id,totalugueis;
     float valaluguel;
     AluguelList *alugueis;
@@ -30,7 +30,13 @@ typedef struct Imovel {
 } IMOVEL;
 
 typedef struct Cliente {
-    char nome[100],nif[9],passaporte[7],morada[100],pais[50],email[254],telefone[9];
+    char nome[100];
+    char passaporte[100];
+    char telefone[100];
+    char nif[100];
+    char pais[50];
+    char email[254];
+    char morada[100];
     int id;
 }CLIENTE;
 

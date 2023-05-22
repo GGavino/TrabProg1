@@ -31,7 +31,7 @@ int guardarimoveis(IMOVEL imoveis[],int tot){
     FILE *fp;
     ALUGUELD aluguelinfo;
     AluguelList *aluguellista;
-    fp= fopen("clientes.dat", "wb");
+    fp= fopen("imoveis.dat", "wb");
     if (fp==NULL){
         printf("Erro ao guardar os imoveis e alugueis em ficheiro");
         return -1;
@@ -49,7 +49,7 @@ int guardarimoveis(IMOVEL imoveis[],int tot){
 int carregarimoveis(IMOVEL imoveis[],int *tot){
     FILE *fp;
     ALUGUELD aluguelinfo;
-    fp= fopen("clientes.dat", "rb");
+    fp= fopen("imoveis.dat", "rb");
     if (fp==NULL){
         printf("Erro ao guardar os imoveis e alugueis em ficheiro");
         return -1;

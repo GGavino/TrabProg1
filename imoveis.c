@@ -10,11 +10,11 @@ int AdicionarImoveis(IMOVEL imoveis[], int tot){
     printf("De qual cidade é o imóvel?\n");fflush(stdin); gets(imoveis[tot].cidade); printf("%s\n",imoveis[tot].cidade);
     printf("A qual freguesia pertence o imóvel?\n");fflush(stdin); gets(imoveis[tot].freguesia); printf("%s\n",imoveis[tot].freguesia);
     printf("Qual o tipo de imóvel?[T1,T2 etc]\n");fflush(stdin); gets(imoveis[tot].tipo); printf("%s\n",imoveis[tot].tipo);
-    printf("Qual a area do imóvel?[em metros quadrados]\n");fflush(stdin); scanf("%d",imoveis[tot].area); printf("%d\n",imoveis[tot].area);
-    printf("Qual o numero de banheiros no imóvel?\n");fflush(stdin); scanf("%d",imoveis[tot].banheiros); printf("%d\n",imoveis[tot].banheiros);
-    printf("Em que ano o imóvel foi construido?\n");fflush(stdin); scanf("%d",imoveis[tot].ano); printf("%d\n",imoveis[tot].ano);
-    printf("Qual o preço base do aluguel deste imóvel?\n");fflush(stdin); scanf("%f",imoveis[tot].valaluguel); printf("%f\n",imoveis[tot].valaluguel);
+    printf("Qual a area do imóvel?[em metros quadrados]\n");fflush(stdin); scanf("%d",&imoveis[tot].area); printf("%d\n",imoveis[tot].area);
+    printf("Qual o numero de banheiros no imóvel?\n");fflush(stdin); scanf("%d",&imoveis[tot].banheiros); printf("%d\n",imoveis[tot].banheiros);
+    printf("Em que ano o imóvel foi construido?\n");fflush(stdin); scanf("%d",&imoveis[tot].ano); printf("%d\n",imoveis[tot].ano);
     printf("Qual a clase energetica do imóvel?\n");fflush(stdin); gets(imoveis[tot].energiaclass); printf("%s\n",imoveis[tot].energiaclass);
+    printf("Qual o preço base do aluguel deste imóvel?\n");fflush(stdin); scanf("%f",&imoveis[tot].valaluguel); printf("%f\n",imoveis[tot].valaluguel);
     do{
         aux=0;
         printf("Alguma observação a fazer sobre o imóvel?\n");fflush(stdin);scanf("%c", &res);
@@ -49,29 +49,30 @@ int AdicionarImoveis(IMOVEL imoveis[], int tot){
 
 int listarTodosImoveis(IMOVEL imoveis[],int tot){
     char aux;
-    printf("\
-    ----------------------------------------\
+    printf("\n\n\
+    ----------------------------------------\n\
                 Lista de imoveis\n\n\
     ----------------------------------------\n\n\n");
     for(int i=0;i<tot;i++){
         listarUmImovel(imoveis[i]);
     }
     printf("Digite qualquer coisa para voltar para o menu anterior\n");
+    fflush(stdin);
     scanf("%c",&aux);
     return 2;
 }
 
 void listarUmImovel(IMOVEL imovel){
 
-    printf("Imóvel %d:\n\n");
+    printf("Imóvel %d:\n\n", imovel.id);
     printf("Morada: %s\n",imovel.morada);
     printf("Cidade: %s\n",imovel.cidade);
     printf("Freguesia: %s\n",imovel.freguesia);
     printf("Tipo: %s\n", imovel.tipo);
     printf("Area: %dm2\n", imovel.area);
     printf("Banheiros: %d\n", imovel.banheiros);
-    printf("Ano: %d", imovel.ano);
-    printf("Valor do aluguel: %f\n", imovel.valaluguel);
-    printf("Classe energetica: %d\n", imovel.energiaclass);
+    printf("Ano: %d\n", imovel.ano);
+    printf("Valor do aluguel: %.2f\n", imovel.valaluguel);
+    printf("Classe energetica: %s\n", imovel.energiaclass);
     printf("\n--------------------------------------------------\n\n\n");
 }

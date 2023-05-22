@@ -30,6 +30,7 @@ int AdicionarAluguel(IMOVEL imoveis[], int tot){
     do{
         res=0;
         printf("\n\nDeseja inserir outro Aluguel?\n");
+        fflush(stdin);
         scanf("%c",&auxchar);
         if(auxchar== 'S' || auxchar == 's'){
             return 31;

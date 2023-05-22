@@ -30,7 +30,7 @@ typedef struct Imovel {
 } IMOVEL;
 
 typedef struct Cliente {
-    char nome[100],nif[9],passaporte[7],morada[100],pais[50],email[254];
+    char nome[100],nif[9],passaporte[7],morada[100],pais[50],email[254],telefone[9];
     int id;
 }CLIENTE;
 

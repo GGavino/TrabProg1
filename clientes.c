@@ -7,7 +7,7 @@ int AdicionarCliente(CLIENTE clientes[], int tot){
     char res;
     printf("Qual o nome do cliente?\n");fflush(stdin); gets(clientes[tot].nome); printf("%s\n",clientes[tot].nome);
     printf("Qual a morada do cliente?\n");fflush(stdin); gets(clientes[tot].morada); printf("%s\n",clientes[tot].morada);
-    printf("De qual país o cliente e?\n");fflush(stdin); gets(clientes[tot].pais); printf("%s\n",clientes[tot].pais);
+    printf("De qual país é o cliente?\n");fflush(stdin); gets(clientes[tot].pais); printf("%s\n",clientes[tot].pais);
     do{
         printf("Qual o nif do cliente?\n");fflush(stdin); gets(clientes[tot].nif); printf("%s\n",clientes[tot].nif);
         aux=0;
@@ -25,6 +25,29 @@ int AdicionarCliente(CLIENTE clientes[], int tot){
         for(i=0; i<9 && aux==0;i++){
             if(!isdigit(clientes[tot].nif[0])) {
                 printf("Nif invalido, o nif deve ter apenas numeros\n");
+                aux=1;
+            }
+        }
+
+        if(aux!=0) printf("\n\n");
+    } while(aux!=0);
+    do{
+        printf("Qual o numero de telefone do cliente?\n");fflush(stdin); gets(clientes[tot].telefone); printf("%s\n",clientes[tot].telefone);
+        aux=0;
+        for(i=0;i<tot && aux == 0;i++){
+            if (clientes[tot].telefone==clientes[i].telefone){
+                aux=1;
+                printf("Já existe um cliente com esse numero, por favor insira um diferente\n");
+
+            }
+        }
+        if(strlen(clientes[tot].telefone)!=9){
+            printf("Numero de telefone invalido, o telefone deve ter 9 numeros\n");
+            aux=1;
+        }
+        for(i=0; i<9 && aux==0;i++){
+            if(!isdigit(clientes[tot].telefone[0])) {
+                printf("Numero de telefone invalido, o telefone deve ter apenas numeros\n");
                 aux=1;
             }
         }
@@ -98,10 +121,11 @@ int AdicionarCliente(CLIENTE clientes[], int tot){
     do{
         aux=0;
         printf("\n\nDeseja inserir outro cliente?\n");
+        fflush(stdin);
         scanf("%c",&res);
         if(res== 'S' || res == 's'){
             return 11;
-        }else if(res=='N' || res == 'n'){
+        }else if(res =='N' || res == 'n'){
             return 1;
         }else{
             printf("Resposta invalida");

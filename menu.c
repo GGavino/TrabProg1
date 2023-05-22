@@ -22,6 +22,7 @@ int menuini(){
         printf("\n0- Sair");
         printf("\n------------------------------\n");
         printf("\nOpção: ");
+        fflush(stdin);
         scanf("%d",&i);
         if(i<0 || i>3)
         {
@@ -48,6 +49,7 @@ int menuclientes(){
         printf("\n0- Sair");
         printf("\n------------------------------\n");
         printf("\nOpção: ");
+        fflush(stdin);
         scanf("%d",&i);
         if(i<0 || i>5)
         {
@@ -63,15 +65,16 @@ int menuclientes(){
 int menuimovel(){
     int i=100;
     while(i<0 || i>5){
-        titulo("Imóveis");
-        printf("\n\n1- Adcionar Imóveis");
-        printf("\n2- Excluir Imóveis");
-        printf("\n3- Alterar Imóveis");
-        printf("\n4- Listar Imóveis");
-        printf("\n5- Filtrar Imóveis");
+        titulo("Imï¿½veis");
+        printf("\n\n1- Adcionar Imï¿½veis");
+        printf("\n2- Excluir Imï¿½veis");
+        printf("\n3- Alterar Imï¿½veis");
+        printf("\n4- Listar Imï¿½veis");
+        printf("\n5- Filtrar Imï¿½veis");
         printf("\n0- Sair");
         printf("\n------------------------------\n");
         printf("\nOpção: ");
+        fflush(stdin);
         scanf("%d",&i);
         if(i<0 || i>5)
         {
@@ -84,14 +87,15 @@ int menuimovel(){
 int menuAluguel(){
     int i=100;
     while(i<0 || i>5){
-        titulo("Imóveis");
+        titulo("Imï¿½veis");
         printf("\n\n1- Adcionar Aluguel");
-        printf("\n2- Listar Imóveis disponiveis");
-        printf("\n3- Listar Alugueis de um Imóvel");
-        printf("\n4- Listar Alugueis de todos os Imóveis");
+        printf("\n2- Listar Imï¿½veis disponiveis");
+        printf("\n3- Listar Alugueis de um Imï¿½vel");
+        printf("\n4- Listar Alugueis de todos os Imï¿½veis");
         printf("\n0- Sair");
         printf("\n------------------------------\n");
         printf("\nOpção: ");
+        fflush(stdin);
         scanf("%d",&i);
         if(i<0 || i>5)
         {

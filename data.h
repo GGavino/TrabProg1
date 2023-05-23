@@ -23,7 +23,7 @@ typedef struct AluguelElem{
 
 typedef struct Imovel {
     char tipo[50],morada[100],cidade[50],freguesia[50],energiaclass[50],observacao[100];
-    int area,banheiros,ano,ativo,id,totalugueis;
+    int area,banheiros,ano,ativo,id,totalugueis,animais;
     float valaluguel;
     AluguelList *alugueis;
 
@@ -46,6 +46,7 @@ int carregarclientes(CLIENTE clientes[],int *tot);
 int guardarimoveis(IMOVEL imoveis[],int tot);
 int carregarimoveis(IMOVEL imoveis[],int *tot);
 void AdicionarAlugelNaLista(IMOVEL imoveis[], ALUGUELD info, int id);
-void libertarAlugueis(IMOVEL imoveis[], int tot);   
+void libertarAlugueis(IMOVEL imoveis[], int tot);
+void removerAlugueisDoCliente(IMOVEL imoveis[],int tot, int id);
 
 #endif

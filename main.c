@@ -12,9 +12,9 @@ int main (int argc, char *argv[]) {
     carregarclientes(clientes, &numclientes);
     carregarimoveis(imoveis, &numimoveis);
     do{
+        system("CLS");
         switch (op)
         {
-            system("CLS"); 
         case 0:
         case 10:
         case 20:
@@ -34,6 +34,7 @@ int main (int argc, char *argv[]) {
         case 11:
             op=AdicionarCliente(clientes,numclientes);
             numclientes++;
+            guardarclientes(clientes,numclientes);
             break;
         case 14:
             op=listarTodosClientes(clientes,numclientes);
@@ -41,9 +42,47 @@ int main (int argc, char *argv[]) {
         case 21:
             op=AdicionarImoveis(imoveis,numimoveis);
             numimoveis++;
+            guardarimoveis(imoveis,numimoveis);
+            break;
+        case 22:
+            removerImoveis(imoveis,numimoveis);
+            numimoveis--;
+            op = 2;
+            guardarimoveis(imoveis,numimoveis);
+        case 23:
+            op=menuAlterarImovel();
+            break;
+        case 231:
+            alterarvalorAImovel(imoveis,numimoveis);
+            op = 2;
+            break;
+        case 232:
+            alterarObsImovel(imoveis,numimoveis);
+            op = 2;
+            break;
+        case 233:
+            alterarClasEneImovel(imoveis,numimoveis);
+            op = 2;
+            break;
+        case 234:
+            alterarTipoImovel(imoveis,numimoveis);
+            op = 2;
+            break;
+        case 235:
+            alterarAreaImovel(imoveis,numimoveis);
+            op = 2;
             break;
         case 24:
             op=listarTodosImoveis(imoveis,numimoveis);
+            break;
+        case 25:
+            op=menuListarImoveisOrdem();
+            break;
+        case 251:
+            op=listarImoveisOrdemVal(imoveis,numimoveis);
+            break;
+        case 252:
+            op=listarImoveisOrdemAno(imoveis,numimoveis);
             break;
         case 31:
             op= AdicionarAluguel(imoveis,numimoveis);
@@ -54,8 +93,6 @@ int main (int argc, char *argv[]) {
         }
         
     } while(op!=0);
-    guardarclientes(clientes, numclientes);
-    guardarimoveis(imoveis, numimoveis);
     libertarAlugueis(imoveis, numimoveis);
     return 0;
 }

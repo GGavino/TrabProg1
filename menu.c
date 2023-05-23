@@ -17,7 +17,7 @@ int menuini(){
     while(i<0 || i>3){
         titulo("Inicio");
         printf("\n\n1- Gerenciar Clientes");
-        printf("\n2- Gerenciar Moveis");
+        printf("\n2- Gerenciar Imoveis");
         printf("\n3- Alugueis");
         printf("\n0- Sair");
         printf("\n------------------------------\n");
@@ -46,7 +46,7 @@ int menuclientes(){
         printf("\n3- Alterar Clientes");
         printf("\n4- Listar Clientes");
         printf("\n5- Filtrar Clientes");
-        printf("\n0- Sair");
+        printf("\n0- Voltar");
         printf("\n------------------------------\n");
         printf("\nOpção: ");
         fflush(stdin);
@@ -70,8 +70,33 @@ int menuimovel(){
         printf("\n2- Excluir Imóveis");
         printf("\n3- Alterar Imóveis");
         printf("\n4- Listar Imóveis");
-        printf("\n5- Filtrar Imóveis");
-        printf("\n0- Sair");
+        printf("\n5- Listar Imóveis por ordem");
+        printf("\n6- Filtrar Imóveis");
+        printf("\n7- Inativar um Imóvel");
+        printf("\n0- Voltar");
+        printf("\n------------------------------\n");
+        printf("\nOpção: ");
+        fflush(stdin);
+        scanf("%d",&i);
+        if(i<0 || i>7)
+        {
+            system("CLS");
+            printf("Opção invalida");
+        }
+    }
+    return 20+i;
+}
+
+int menuAlterarImovel(){
+    int i=100;
+    while(i<0 || i>5){
+        titulo("Alterar Imovel");
+        printf("\n\n1- Alterar valor base do aluguel");
+        printf("\n2- Alterar observações");
+        printf("\n3- Alterar Classe Energetica");
+        printf("\n4- Alterar tipo do Imóvel");
+        printf("\n5- Alterar Area do Imóvel");
+        printf("\n0- Voltar");
         printf("\n------------------------------\n");
         printf("\nOpção: ");
         fflush(stdin);
@@ -82,8 +107,30 @@ int menuimovel(){
             printf("Opção invalida");
         }
     }
-    return 20+i;
+    if (i=0) return 2;
+    return i +230;
 }
+int menuListarImoveisOrdem(){
+    int i=100;
+    while(i<0 || i>5){
+        titulo("Listar Imoveis por ordem");
+        printf("\n\n1- Listar por valo do aluguel");
+        printf("\n2- Listar por ordem decrescente do ano de construção");
+        printf("\n0- Voltar");
+        printf("\n------------------------------\n");
+        printf("\nOpção: ");
+        fflush(stdin);
+        scanf("%d",&i);
+        if(i<0 || i>2)
+        {
+            system("CLS");
+            printf("Opção invalida");
+        }
+    }
+    if (i=0) return 2;
+    return i+250;
+}
+
 int menuAluguel(){
     int i=100;
     while(i<0 || i>5){
@@ -92,12 +139,12 @@ int menuAluguel(){
         printf("\n2- Listar Imóveis disponiveis");
         printf("\n3- Listar Alugueis de um Imóvel");
         printf("\n4- Listar Alugueis de todos os Imóveis");
-        printf("\n0- Sair");
+        printf("\n0- Voltar");
         printf("\n------------------------------\n");
         printf("\nOpção: ");
         fflush(stdin);
         scanf("%d",&i);
-        if(i<0 || i>5)
+        if(i<0 || i>4)
         {
             system("CLS");
             printf("Opção invalida");

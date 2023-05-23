@@ -7,3 +7,7 @@ int menuimovel();
 int menuclientes();
 
 int menuAluguel();
+
+int menuAlterarImovel();
+
+int menuListarImoveisOrdem();

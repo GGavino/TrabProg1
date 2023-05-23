@@ -93,11 +93,26 @@ void libertarAlugueis(IMOVEL imoveis[], int tot){
     AluguelList *aux=NULL,*aux2=NULL;
     
     for(int i=0;i<tot;i++){
-        for(aux = imoveis[i].alugueis; aux != NULL; aux=aux->proximo) {
+        for(aux = imoveis[i].alugueis->proximo; aux->proximo != NULL; aux=aux->proximo) {
+            if(aux->anterior!=NULL) aux2 = aux->anterior;
             if(aux2!=NULL) free(aux2);
-            if(aux->anterior!=NULL) aux2 = aux;
         }
-        free(aux2->proximo);
+        aux2 = aux->anterior;
+        free(aux2);
+        free(aux);
     }
 
+}
+void removerAlugueisDoCliente(IMOVEL imoveis[],int tot, int id){
+    AluguelList *aux=NULL,*aux2=NULL;
+    
+    for(int i=0;i<tot;i++){
+        for(aux = imoveis[i].alugueis->proximo; aux->proximo != NULL; aux=aux->proximo) {
+            if(aux->anterior!=NULL) aux2 = aux->anterior;
+            if(aux2->data.clientid == id ) free(aux2);
+        }
+        aux2 = aux->anterior;
+        if(aux2->data.clientid == id )free(aux2);
+        if(aux->data.clientid == id )free(aux);
+    }
 }

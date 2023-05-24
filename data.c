@@ -74,11 +74,11 @@ void AdicionarAlugelNaLista(IMOVEL imoveis[], ALUGUELD info, int id){
 
     if (imoveis[id].alugueis == NULL) {
         imoveis[id].alugueis = newAluguel;
-    }else if((12*info.anoini + info.mesini + info.diaini / 100) < (12*imoveis[id].alugueis->data.anoini + imoveis[id].alugueis->data.mesini + imoveis[id].alugueis->data.diaini / 100)){
+    }else if(comparardatas(info.inicio,imoveis[id].alugueis->data.inicio)< 0){
         newAluguel->proximo = imoveis[id].alugueis;
         imoveis[id].alugueis = newAluguel;
     } else {
-        while (current->proximo != NULL && (12*info.anoini + info.mesini + info.diaini / 100) < (12*current->data.anoini + current->data.mesini + current->data.diaini / 100)) {
+        while (current->proximo != NULL && comparardatas(info.inicio,current->data.inicio)< 0) {
             current = current->proximo;
         }
         newAluguel->proximo = current;
@@ -108,11 +108,68 @@ void removerAlugueisDoCliente(IMOVEL imoveis[],int tot, int id){
     
     for(int i=0;i<tot;i++){
         for(aux = imoveis[i].alugueis->proximo; aux->proximo != NULL; aux=aux->proximo) {
-            if(aux->anterior!=NULL) aux2 = aux->anterior;
-            if(aux2->data.clientid == id ) free(aux2);
+            aux2 = aux->anterior;
+            if(aux2->data.clientid == id ) {
+                free(aux2);
+            }else if(aux2->data.clientid > id) aux2->data.clientid--;
         }
         aux2 = aux->anterior;
-        if(aux2->data.clientid == id )free(aux2);
-        if(aux->data.clientid == id )free(aux);
+        if(aux2->data.clientid == id ) {
+            free(aux2);
+        }else if(aux2->data.clientid > id) aux2->data.clientid--;
+        if(aux->data.clientid == id ) {
+            free(aux);
+         }else if(aux->data.clientid > id) aux->data.clientid--;
     }
+}
+
+
+int comparardatas(DATA data1, DATA data2){
+    int dif=0;
+    dif= data2.dia-data1.dia;
+    for(dif=0; data1.dia!=data2.dia || data1.mes!=data2.mes || data1.ano!=data2.ano; ){
+        if((12*data1.ano + data1.mes + data1.dia / 100) < (12*data2.ano + data2.mes + data2.dia / 100)){
+            data2.dia--;
+            if(data2.dia < 1){
+                int DiasEmUmMes[] = {31, 28 + Bissexto(data2.ano), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+                data2.mes--;
+                if(data2.mes<1){
+                    data2.mes=12;
+                    data2.ano--;
+                }
+                data2.dia = DiasEmUmMes[data2.mes - 1];
+                dif--;
+            }
+        } else {
+            data1.dia--;
+            if(data1.dia < 1){
+                int DiasEmUmMes[] = {31, 28 + Bissexto(data1.ano), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+                data1.mes--;
+                if(data1.mes<1){
+                    data1.mes=12;
+                    data1.ano--;
+                }
+                data1.dia = DiasEmUmMes[data1.mes - 1];
+                dif++;
+            }
+        }
+    }
+
+}
+
+int Bissexto(int ano) {
+    return (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0);
+}
+
+int validardata(DATA data) {
+    if (data.ano < 1 || data.mes < 1 || data.mes > 12 || data.dia < 1) {
+        return 0;
+    }
+
+    int DiasEmUmMes[] = {31, 28 + Bissexto(data.ano), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    int diasmax = DiasEmUmMes[data.mes - 1];
+
+    if (data.dia > diasmax) return 0;
+
+    return 1;
 }

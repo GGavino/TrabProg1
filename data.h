@@ -9,8 +9,13 @@
 #include <string.h>
 
 
+typedef struct data{
+    int dia,mes,ano;
+}DATA;
+
 typedef struct AluguelData{
-    int diapag,mespag,anopag,diaini,mesini,anoini,diafim,mesfim,anofim,clientid;
+    int clientid;
+    DATA pagamento,inicio,fim;
     float valor;
 } ALUGUELD;
 
@@ -41,12 +46,15 @@ typedef struct Cliente {
 }CLIENTE;
 
 
-int guardarclientes(CLIENTE clientes[],int tot);
-int carregarclientes(CLIENTE clientes[],int *tot);
-int guardarimoveis(IMOVEL imoveis[],int tot);
-int carregarimoveis(IMOVEL imoveis[],int *tot);
-void AdicionarAlugelNaLista(IMOVEL imoveis[], ALUGUELD info, int id);
-void libertarAlugueis(IMOVEL imoveis[], int tot);
-void removerAlugueisDoCliente(IMOVEL imoveis[],int tot, int id);
+int guardarclientes(CLIENTE clientes[],int tot); // Guarda as informações dos clientes da memoria RAM para o ficheiro
+int carregarclientes(CLIENTE clientes[],int *tot); // Carrega as informações dos clientes do ficheiro para a memoria RAM
+int guardarimoveis(IMOVEL imoveis[],int tot); // Guarda as informações dos imoveis e alugueis da memoria RAM para o ficheiro
+int carregarimoveis(IMOVEL imoveis[],int *tot); // Carrega as informações dos imoveis e alugueis do ficheiro para a memoria RAM
+void AdicionarAlugelNaLista(IMOVEL imoveis[], ALUGUELD info, int id); // Adciona um novo aluguel a lista ligada, sempre em ordem cresente das datas
+void libertarAlugueis(IMOVEL imoveis[], int tot); // Função que liberta os a lugueis da memoria para evitar fuga de memoria
+void removerAlugueisDoCliente(IMOVEL imoveis[],int tot, int id); // Função usada para remover todos os alugueis de um cliente quando o mesmo é removido
+int Bissexto(int ano); // Verifica se um ano é Bissexto, retorna 1 caso sim e 0 caso não
+int validardata(DATA data); // Verifica se a data é valida(exemplo de data invalida: 30 de fevereiro), retorna 1 caso sim e 0 caso não
+int comparardatas(DATA data1, DATA data2); // Recebe duas datas e recebe o numero de dias de diferença entra a primeira e a segunda
 
 #endif

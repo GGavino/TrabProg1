@@ -45,10 +45,10 @@ int main (int argc, char *argv[]) {
             guardarimoveis(imoveis,numimoveis);
             break;
         case 22:
-            removerImoveis(imoveis,numimoveis);
-            numimoveis--;
+            numimoveis= numimoveis-removerImoveis(imoveis,numimoveis);
             op = 2;
             guardarimoveis(imoveis,numimoveis);
+            break;
         case 23:
             op=menuAlterarImovel();
             break;
@@ -84,11 +84,40 @@ int main (int argc, char *argv[]) {
         case 252:
             op=listarImoveisOrdemAno(imoveis,numimoveis);
             break;
+        case 26:
+            op=menuFiltrarImoveis();
+            break;
+        case 261:
+            op=filtrarImoveisAnimais(imoveis,numimoveis);
+            break;
+        case 262:
+            op=filtrarImoveisCidade(imoveis,numimoveis);
+            break;
+        case 263:
+            op=filtrarImoveisTipo(imoveis,numimoveis);
+            break;
+        case 27:
+            op=DeReAtivarImoveis(imoveis,numimoveis);
+            guardarimoveis(imoveis,numimoveis);
+            break;
         case 31:
-            op= AdicionarAluguel(imoveis,numimoveis);
+            op= AdicionarAluguel(imoveis,numimoveis,numclientes);
+            guardarimoveis(imoveis,numimoveis);
+            break;
+        case 32:
+            op=listarImoveisDisponiveis(imoveis,numimoveis);
+            break;
+        case 33:
+            op=listarAlugueisImovel(imoveis,numimoveis);
+            break;
+        case 34:
+            op=listarAlugueisCliente(imoveis,numimoveis,clientes,numclientes);
+            break;
+        case 35:
+            op=listarTodosAlugueis(imoveis,numimoveis);
             break;
         default:
-            
+            op = menuini();
             break;
         }
         

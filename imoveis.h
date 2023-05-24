@@ -15,7 +15,7 @@ int listarImoveisOrdemVal(IMOVEL imoveis[],int tot); // Lista os imoveis por ord
 int listarImoveisOrdemAno(IMOVEL imoveis[],int tot); // Lista os imoveis por ordem decrescente de Ano de Construção
 int DeReAtivarImoveis(IMOVEL imoveis[],int tot); // Desativa ou Reativa um imovil escolhido pelo utilizador
 void listarUmImovel(IMOVEL imovel); // Lista um unico imovel(função usada como base para todas as outras funções de listar imoveis)
-int filtrarImoveisAnimais(IMOVEL imoveis[],int tot);
-int filtrarImoveisCidade(IMOVEL imoveis[],int tot);
-int filtrarImoveisTipo(IMOVEL imoveis[],int tot);
+int filtrarImoveisAnimais(IMOVEL imoveis[],int tot); // Lista imoveis que permitem animais
+int filtrarImoveisCidade(IMOVEL imoveis[],int tot); // Lista imoveis que sejam de uma cidade esolhida pelo utilizador
+int filtrarImoveisTipo(IMOVEL imoveis[],int tot); // lista imoveis que sejam do tipo esolhido pelo utilizador
 #endif

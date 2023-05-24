@@ -24,6 +24,7 @@ int carregarclientes(CLIENTE clientes[],int *tot){
     }
     fread(tot,sizeof(int),1,fp);
     fread(clientes,sizeof(CLIENTE), *tot,fp);
+    fclose(fp);
 }
 
 
@@ -124,38 +125,36 @@ void removerAlugueisDoCliente(IMOVEL imoveis[],int tot, int id){
 }
 
 
-int comparardatas(DATA data1, DATA data2){
-    int dif=0;
-    dif= data2.dia-data1.dia;
-    for(dif=0; data1.dia!=data2.dia || data1.mes!=data2.mes || data1.ano!=data2.ano; ){
-        if((12*data1.ano + data1.mes + data1.dia / 100) < (12*data2.ano + data2.mes + data2.dia / 100)){
-            data2.dia--;
-            if(data2.dia < 1){
-                int DiasEmUmMes[] = {31, 28 + Bissexto(data2.ano), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-                data2.mes--;
-                if(data2.mes<1){
-                    data2.mes=12;
-                    data2.ano--;
-                }
-                data2.dia = DiasEmUmMes[data2.mes - 1];
-                dif--;
-            }
-        } else {
-            data1.dia--;
-            if(data1.dia < 1){
-                int DiasEmUmMes[] = {31, 28 + Bissexto(data1.ano), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-                data1.mes--;
-                if(data1.mes<1){
-                    data1.mes=12;
-                    data1.ano--;
-                }
-                data1.dia = DiasEmUmMes[data1.mes - 1];
-                dif++;
-            }
-        }
-    }
+int DiasDeUmMes(int mes, int ano) {
+    int Diames[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
+    if (mes == 2 && Bissexto(ano))
+        return 29;
+
+    return Diames[mes - 1];
 }
+
+int comparardatas(DATA data1, DATA data2) {
+    int days1 = 0, days2 = 0;
+
+    for (int i = 1; i < data1.mes; i++)
+        days1 += DiasDeUmMes(i, data1.ano);
+
+    for (int i = 1; i < data2.mes; i++)
+        days2 += DiasDeUmMes(i, data2.ano);
+
+    days1 += data1.dia;
+    days2 += data2.dia;
+
+    for (int i = 1; i < data1.ano; i++)
+        days1 += Bissexto(i) ? 366 : 365;
+
+    for (int i = 1; i < data2.ano; i++)
+        days2 += Bissexto(i) ? 366 : 365;
+
+    return days2 - days1;
+}
+
 
 int Bissexto(int ano) {
     return (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0);

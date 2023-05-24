@@ -30,21 +30,24 @@ int AdicionarAluguel(IMOVEL imoveis[], int tot,int totclientes){
         return 3;
     }
     do{
-        printf("Qual o id do Imóvel ao qual este aluguel pertence?\n");res=scanf("%d",&id);
+        res=0;
+        printf("Qual o id do Imóvel ao qual este aluguel pertence?\n");fflush(stdin);res=scanf("%d",&id);
     }while(res!=1 || id < 1 || id > tot); // verifica se o id foi lido de maneira correta e se o mesmo é valido
     do{
+        res=0;
         printf("Qual o id do Cliente ao qual este aluguel pertence?\n");res=scanf("%d",&aux.clientid);
         if(res!=1) printf("Reposta invalida\n");
         if(aux.clientid < 1 || aux.clientid > totclientes) printf("O id do cliente deve ser um numero entre 1 e %d", totclientes);
     }while(res!=1 || aux.clientid < 1 || aux.clientid > totclientes); // verifica se o id foi lido de maneira correta e se o mesmo é valido
     do{
-        printf("Qual a data de inicio do aluguel?[dd/mm/aaaa]\n");res=scanf("%d/%d/%d",&aux.inicio.dia,&aux.inicio.mes,&aux.inicio.ano);
+        res=0;
+        printf("Qual a data de inicio do aluguel?[dd/mm/aaaa]\n");fflush(stdin);res=scanf("%d/%d/%d",&aux.inicio.dia,&aux.inicio.mes,&aux.inicio.ano);
         if(res != 3) printf("Resposta invalida\n\n");
         passou=0,repetido=0;
         for(aux2=imoveis[id].alugueis; aux2 != NULL && passou == 0 && repetido == 0; aux2 = aux2->proximo){
-            if(comparardatas(aux2->data.inicio,aux.inicio) < 0 && comparardatas(aux2->data.inicio,aux.fim) < 0 ){
+            if(comparardatas(aux2->data.inicio,aux.inicio) > 0 && comparardatas(aux2->data.fim,aux.fim) < 0 ){
                 repetido = 1;
-            } else if(comparardatas(aux2->data.inicio,aux.inicio) > 0){
+            } else if(comparardatas(aux2->data.inicio,aux.inicio) < 0){
                 passou = 1;
             }
         }
@@ -52,19 +55,26 @@ int AdicionarAluguel(IMOVEL imoveis[], int tot,int totclientes){
     }while(res!=3 || !validardata(aux.inicio) || repetido == 1);// verifica se a data inicial foi lida de maneira correta e se a mesma é valida
 
     do{
-        printf("Qual a data de fim do aluguel?[dd/mm/aaaa]\n");res=scanf("%d/%d/%d",&aux.inicio.dia,&aux.inicio.mes,&aux.inicio.ano);
-        if(res != 3) printf("Resposta invalida\n\n");
-        if(!validardata(aux.fim)) printf("Data invalida\n\n");
-        if(comparardatas(aux.inicio,aux.fim) > -7) printf("O aluguel deve ser de pelo menos 7 dias\n\n");
+        res=0,repetido = 0,passou = 0;
+        printf("Qual a data de fim do aluguel?[dd/mm/aaaa]\n");fflush(stdin);res=scanf("%d/%d/%d",&aux.fim.dia,&aux.fim.mes,&aux.fim.ano);
+        if(res != 3) {
+            printf("Resposta invalida\n\n");
+        }else if(!validardata(aux.fim)){
+            printf("Data invalida\n\n");
+        }else if(comparardatas(aux.inicio,aux.fim) < 7) {
+            printf("O o fim aluguel deve ser de pelo menos 7 dias depois do seu inicio\n\n");
+        }
+        printf("%d",comparardatas(aux.inicio,aux.fim));
         for(aux2=imoveis[id].alugueis; aux2 != NULL && passou == 0 && repetido == 0; aux2 = aux2->proximo){
-            if(comparardatas(aux2->data.inicio,aux.fim) < 0 && comparardatas(aux2->data.inicio,aux.fim) < 0 ){
+            if(comparardatas(aux2->data.inicio,aux.fim) < 0 && comparardatas(aux2->data.fim,aux.fim) < 0 ){
                 repetido = 1;
-            } else if(comparardatas(aux2->data.inicio,aux.fim) > 0){
+            } else if(comparardatas(aux2->data.inicio,aux.fim) < 0){
                 passou = 1;
             }
         }
-    }while(res!=3 || !validardata(aux.fim) || comparardatas(aux.inicio,aux.fim) > -7);// verifica se a data final foi lida de maneira correta e se a mesma é valida
+    }while(res!=3 || !validardata(aux.fim) || comparardatas(aux.inicio,aux.fim) < 7 || repetido);// verifica se a data final foi lida de maneira correta e se a mesma é valida
     do{
+        res=0;
         printf("Qual a data de pagamento do aluguel?[dd/mm/aaaa]\n");res=scanf("%d/%d/%d",&aux.pagamento.dia,&aux.pagamento.mes,&aux.pagamento.ano);
         if(res != 3) printf("Resposta invalida\n\n");
         if(!validardata(aux.pagamento)) printf("Data invalida\n\n");
@@ -100,7 +110,7 @@ int listarImoveisDisponiveis(IMOVEL imoveis[],int tot){
         return 3;
     }
     do{
-        aux=printf("Qual data pretende verificar?[dd/mm/aaaa]\n");scanf("%d/%d/%d",pesquisa.dia,pesquisa.mes,pesquisa.ano);
+        printf("Qual data pretende verificar?[dd/mm/aaaa]\n");aux=scanf("%d/%d/%d",&pesquisa.dia,&pesquisa.mes,&pesquisa.ano);
         if(aux != 3) printf("Resposta invalida\n\n");
         if(!validardata(pesquisa)) printf("Data invalida\n\n");
     }while(aux!=3 || !validardata(pesquisa));

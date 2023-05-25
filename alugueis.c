@@ -66,7 +66,7 @@ int AdicionarAluguel(IMOVEL imoveis[], int tot,int totclientes){
         }
         printf("%d",comparardatas(aux.inicio,aux.fim));
         for(aux2=imoveis[id].alugueis; aux2 != NULL && passou == 0 && repetido == 0; aux2 = aux2->proximo){
-            if(comparardatas(aux2->data.inicio,aux.fim) < 0 && comparardatas(aux2->data.fim,aux.fim) < 0 ){
+            if(comparardatas(aux2->data.inicio,aux.fim) > 0 && comparardatas(aux2->data.fim,aux.fim) < 0 ){
                 repetido = 1;
             } else if(comparardatas(aux2->data.inicio,aux.fim) < 0){
                 passou = 1;
@@ -79,7 +79,12 @@ int AdicionarAluguel(IMOVEL imoveis[], int tot,int totclientes){
         if(res != 3) printf("Resposta invalida\n\n");
         if(!validardata(aux.pagamento)) printf("Data invalida\n\n");
     }while(res!=3 || !validardata(aux.pagamento));// verifica se a data do pagamento foi lida de maneira correta e se a mesma é valida
+    printf("Qual sera o valor pago para o aluguel?(valor base é de %.2f)\n", imoveis[id-1].valaluguel);fflush(stdin);scanf("%f",&aux.valor);
+    
+    
+    
     AdicionarAlugelNaLista(imoveis,aux, id-1);
+    imoveis[id-1].totalugueis++;
     do{
         res=0;
         printf("\n\nDeseja inserir outro Aluguel?\n");
@@ -121,7 +126,7 @@ int listarImoveisDisponiveis(IMOVEL imoveis[],int tot){
     for(int i = 0; i < tot; i++){
         aux=1, passou = 0;
         for(auxlist=imoveis[i].alugueis; auxlist!=NULL && aux == 1 && passou == 0; auxlist=auxlist->proximo){
-            if(comparardatas(auxlist->data.inicio, pesquisa) < 0 && comparardatas(auxlist->data.fim, pesquisa) > 0 )   aux = 0;
+            if(comparardatas(auxlist->data.inicio, pesquisa) > 0 && comparardatas(auxlist->data.fim, pesquisa) <0 )   aux = 0;
             if(comparardatas(auxlist->data.inicio, pesquisa) < 0) passou = 1;
         }
         if(aux) listarUmImovel(imoveis[i]);
@@ -379,5 +384,7 @@ void listarUmAluguel(ALUGUELD aluguel){
     printf("Data de pagamento: %d/%d/%d\n", aluguel.pagamento.dia,aluguel.pagamento.mes,aluguel.pagamento.ano);
     printf("Data de inicio do aluguel: %d/%d/%d\n", aluguel.inicio.dia,aluguel.inicio.mes,aluguel.inicio.ano);
     printf("Data de fim do aluguel: %d/%d/%d\n", aluguel.fim.dia,aluguel.fim.mes,aluguel.fim.ano);
+    printf("Valor do aluguel: %.2f$\n",aluguel.valor);
+
 }
 

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "data.h"
+#include "alugueis.h"
 
 int guardarclientes(CLIENTE clientes[],int tot){
     FILE *fp;
@@ -42,6 +43,7 @@ int guardarimoveis(IMOVEL imoveis[],int tot){
         fwrite(&imoveis[i],sizeof(IMOVEL),1,fp);
         for(aluguellista = imoveis[i].alugueis; aluguellista != NULL; aluguellista=aluguellista->proximo) {
             aluguelinfo=aluguellista->data;
+            listarUmAluguel(aluguelinfo);
             fwrite(&aluguelinfo,sizeof(ALUGUELD),1,fp);
         }
     }
@@ -52,15 +54,20 @@ int carregarimoveis(IMOVEL imoveis[],int *tot){
     ALUGUELD aluguelinfo;
     fp= fopen("imoveis.dat", "rb");
     if (fp==NULL){
-        printf("Erro ao guardar os imoveis e alugueis em ficheiro");
+        printf("Erro ao carregar os imoveis e alugueis em ficheiro");
         return -1;
     }
     fread(tot,sizeof(int),1,fp);
     for(int i=0;i<*tot;i++){
+        printf("i=%d\n",i);
         fread(&imoveis[i],sizeof(IMOVEL),1,fp);
+        imoveis[i].alugueis=NULL;
+        printf("%d",imoveis[i].totalugueis);
         for(int j=0;j<imoveis[i].totalugueis;j++){
             fread(&aluguelinfo,sizeof(ALUGUELD),1,fp);
-            AdicionarAlugelNaLista(imoveis, aluguelinfo, j);
+            listarUmAluguel(aluguelinfo);
+            AdicionarAlugelNaLista(imoveis, aluguelinfo, i);
+            printf("teste1");
         }
     }
     fclose(fp);
@@ -75,20 +82,24 @@ void AdicionarAlugelNaLista(IMOVEL imoveis[], ALUGUELD info, int id){
 
     if (imoveis[id].alugueis == NULL) {
         imoveis[id].alugueis = newAluguel;
-    }else if(comparardatas(info.inicio,imoveis[id].alugueis->data.inicio)< 0){
+    }else if(comparardatas(info.inicio,imoveis[id].alugueis->data.inicio)> 0){
         newAluguel->proximo = imoveis[id].alugueis;
+        imoveis[id].alugueis->anterior=newAluguel;
         imoveis[id].alugueis = newAluguel;
     } else {
-        while (current->proximo != NULL && comparardatas(info.inicio,current->data.inicio)< 0) {
+        while (current->proximo != NULL && comparardatas(info.inicio,current->data.inicio)> 0) {
             current = current->proximo;
         }
-        newAluguel->proximo = current;
-        newAluguel->anterior= current->anterior;
-        current->anterior->proximo = newAluguel;
-        current->anterior = newAluguel;
+        if(current->proximo ==NULL){
+            newAluguel->anterior= current;
+            current->proximo = newAluguel;
+        }else{
+            newAluguel->proximo = current;
+            newAluguel->anterior= current->anterior;
+            current->anterior->proximo = newAluguel;
+            current->anterior = newAluguel;
+        }
     }
-
-    imoveis[id].totalugueis++;
 }
 void libertarAlugueis(IMOVEL imoveis[], int tot){
     AluguelList *aux=NULL,*aux2=NULL;

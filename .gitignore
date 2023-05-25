@@ -1,3 +1,7 @@
 .vscode/*
 .vscode
 main.exe
+imoveis.dat
+clientes.dat
+dat_backup
+dat_backup/*

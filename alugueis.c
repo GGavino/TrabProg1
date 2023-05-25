@@ -237,14 +237,15 @@ int listarAlugueisCliente(IMOVEL imoveis[], int totimoveis,CLIENTE clientes[], i
             }
         }
         if(aux==0){
-            for(int i=0;i<totclientes && aux == 0;i++){
-                    aux =1;
-                if (nif==clientes[i].nif){
+            aux =1;
+            for(int i=0;i<totclientes && aux == 1;i++){
+                printf("%d\n",strcmp(nif,clientes[i].nif));
+                if (strcmp(nif,clientes[i].nif)){
                     aux=0;
                     id=i;
                 }
             }
-            if(aux == 1) printf("Néo ha nenhum cliente registrado com esse Nif");
+            if(aux == 1) printf("Não ha nenhum cliente registrado com esse Nif");
         }
         if(aux!=0) printf("\n\n");
     } while(aux!=0);
@@ -279,11 +280,11 @@ int fechoDia(IMOVEL imoveis[], int tot){
     int res,passou,aux;
     char c;
     do{
-        res=printf("Qual data pretende fechar?[dd/mm/aaaa]\n");res=scanf("%d/%d/%d",data.dia,data.mes,data.ano);
+        res=printf("Qual data pretende fechar?[dd/mm/aaaa]\n");res=scanf("%d/%d/%d",&data.dia,&data.mes,&data.ano);
         if(res != 3) printf("Resposta invalida\n\n");
         if(!validardata(data)) printf("Data invalida\n\n");
     }while(res!=3 || !validardata(data));
-    sprintf(nomeficheiro,"FechoDia_%d_%d_%d.txt");
+    sprintf(nomeficheiro,"FechoDia_%d_%d_%d.txt",data.dia,data.mes,data.ano);
     fp = fopen(nomeficheiro,"w");
     if (fp == NULL){
         printf("Falha ao criar o ficheiro");
@@ -300,11 +301,18 @@ int fechoDia(IMOVEL imoveis[], int tot){
                     fprintf(fp,"Alugueis do Imovel %d:\n",i);
                     aux=1;
                 }
-                fprintf(fp,"ID do Cliente que alugou o imovel: %d\nData de pagamento: %d/%d/%d\nData de inicio do aluguel: %d/%d/%d\nData de fim do aluguel: %d/%d/%d\n\n\n",auxlist->data.clientid,auxlist->data.pagamento.dia,auxlist->data.pagamento.mes,auxlist->data.pagamento.ano,auxlist->data.inicio.dia,auxlist->data.inicio.mes,auxlist->data.inicio.ano,auxlist->data.fim.dia,auxlist->data.fim.mes,auxlist->data.fim.ano);            
-            }
+                fprintf(fp,"\
+ID do Cliente que alugou o imovel: %d\n\
+Data de pagamento: %d/%d/%d\n\
+Data de inicio do aluguel: %d/%d/%d\n\
+Data de fim do aluguel: %d/%d/%d\n\
+Valor Pago: %2.f\n\n",auxlist->data.clientid,auxlist->data.pagamento.dia,auxlist->data.pagamento.mes,auxlist->data.pagamento.ano,auxlist->data.inicio.dia,auxlist->data.inicio.mes,auxlist->data.inicio.ano,auxlist->data.fim.dia,auxlist->data.fim.mes,auxlist->data.fim.ano,auxlist->data.valor);                        }
             if(aux) fprintf(fp,"\n\n");
         }
-    }     
+    }
+    fclose(fp);
+    return 3;
+   
 }
 int fechoMes(IMOVEL imoveis[], int tot){
     DATA data;
@@ -315,17 +323,18 @@ int fechoMes(IMOVEL imoveis[], int tot){
     int res,passou,aux;
     data.dia=1;
     do{
-        res=printf("Qual o mes pretende fechar?[mm/aaaa]\n");res=scanf("%d/%d",data.mes,data.ano);
+        res=printf("Qual o mes pretende fechar?[mm/aaaa]\n");res=scanf("%d/%d",&data.mes,&data.ano);
         if(res != 2) printf("Resposta invalida\n\n");
         if(!validardata(data)) printf("Data invalida\n\n");
     }while(res!=2 || !validardata(data));
-    sprintf(nomeficheiro,"FechoMes_%d_%d.txt");
+    sprintf(nomeficheiro,"FechoMes_%d_%d.txt",data.mes,data.ano);
     fp = fopen(nomeficheiro,"w");
     if (fp == NULL){
         printf("Falha ao criar o ficheiro");
         printf("Digite qualquer coisa para voltar para o menu anterior\n");
         fflush(stdin);
         scanf("%c",&c);
+        fclose(fp);
         return 3;
     }
     for(int i = 0; i < tot; i++){
@@ -336,11 +345,18 @@ int fechoMes(IMOVEL imoveis[], int tot){
                     fprintf(fp,"Alugueis do Imovel %d:\n",i);
                     aux=1;
                 }
-                fprintf(fp,"ID do Cliente que alugou o imovel: %d\nData de pagamento: %d/%d/%d\nData de inicio do aluguel: %d/%d/%d\nData de fim do aluguel: %d/%d/%d\n\n\n",auxlist->data.clientid,auxlist->data.pagamento.dia,auxlist->data.pagamento.mes,auxlist->data.pagamento.ano,auxlist->data.inicio.dia,auxlist->data.inicio.mes,auxlist->data.inicio.ano,auxlist->data.fim.dia,auxlist->data.fim.mes,auxlist->data.fim.ano);            
-            }
+                fprintf(fp,"\
+ID do Cliente que alugou o imovel: %d\n\
+Data de pagamento: %d/%d/%d\n\
+Data de inicio do aluguel: %d/%d/%d\n\
+Data de fim do aluguel: %d/%d/%d\n\
+Valor Pago: %2.f\n\n",auxlist->data.clientid,auxlist->data.pagamento.dia,auxlist->data.pagamento.mes,auxlist->data.pagamento.ano,auxlist->data.inicio.dia,auxlist->data.inicio.mes,auxlist->data.inicio.ano,auxlist->data.fim.dia,auxlist->data.fim.mes,auxlist->data.fim.ano,auxlist->data.valor);                        }
             if(aux) fprintf(fp,"\n\n");
         }
-    }     
+    }
+    fclose(fp);
+    return 3;
+
 }
 int fechoAno(IMOVEL imoveis[], int tot){
     DATA data;
@@ -350,8 +366,8 @@ int fechoAno(IMOVEL imoveis[], int tot){
     int passou,aux;
     char res;
     data.dia=1;
-    printf("Qual o ano pretende fechar?[mm/aaaa]\n");scanf("%d",data.ano);
-    sprintf(nomeficheiro,"FechoAno_%d.txt");
+    printf("Qual o ano pretende fechar?\n");scanf("%d",&data.ano);
+    sprintf(nomeficheiro,"FechoAno_%d.txt",data.ano);
     fp = fopen(nomeficheiro,"w");
     if (fp == NULL){
         printf("Falha ao criar o ficheiro");
@@ -367,15 +383,22 @@ int fechoAno(IMOVEL imoveis[], int tot){
             for(auxlist=imoveis[i].alugueis; auxlist!=NULL && passou == 0; auxlist=auxlist->proximo){
                 if(auxlist->data.pagamento.mes==data.mes && auxlist->data.pagamento.ano==data.ano){
                     if(!aux){
-                        fprintf(fp,"Alugueis do Imovel %d:\n",i);
+                        fprintf(fp,"Alugueis do Imovel %d:\n",i+1);
                         aux=1;
                     }
-                    fprintf(fp,"ID do Cliente que alugou o imovel: %d\nData de pagamento: %d/%d/%d\nData de inicio do aluguel: %d/%d/%d\nData de fim do aluguel: %d/%d/%d\n\n\n",auxlist->data.clientid,auxlist->data.pagamento.dia,auxlist->data.pagamento.mes,auxlist->data.pagamento.ano,auxlist->data.inicio.dia,auxlist->data.inicio.mes,auxlist->data.inicio.ano,auxlist->data.fim.dia,auxlist->data.fim.mes,auxlist->data.fim.ano);            
+                    fprintf(fp,"\
+ID do Cliente que alugou o imovel: %d\n\
+Data de pagamento: %d/%d/%d\n\
+Data de inicio do aluguel: %d/%d/%d\n\
+Data de fim do aluguel: %d/%d/%d\n\
+Valor Pago: %2.f\n\n",auxlist->data.clientid,auxlist->data.pagamento.dia,auxlist->data.pagamento.mes,auxlist->data.pagamento.ano,auxlist->data.inicio.dia,auxlist->data.inicio.mes,auxlist->data.inicio.ano,auxlist->data.fim.dia,auxlist->data.fim.mes,auxlist->data.fim.ano,auxlist->data.valor);            
                 }
                 if(aux) fprintf(fp,"\n\n");
             }
         }
     }
+    fclose(fp);
+    return 3;
 }
 
 void listarUmAluguel(ALUGUELD aluguel){

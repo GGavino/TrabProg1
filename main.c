@@ -116,6 +116,15 @@ int main (int argc, char *argv[]) {
         case 35:
             op=listarTodosAlugueis(imoveis,numimoveis);
             break;
+        case 36:
+            op=fechoDia(imoveis,numimoveis);
+            break;
+        case 37:
+            op=fechoMes(imoveis,numimoveis);
+            break;
+        case 38:
+            op=fechoAno(imoveis,numimoveis);
+            break;
         default:
             op = menuini();
             break;

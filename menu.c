@@ -153,7 +153,7 @@ int menuFiltrarImoveis(){
 }
 int menuAluguel(){
     int i=100;
-    while(i<0 || i>7){
+    while(i<0 || i>8){
         titulo("Imóveis");
         printf("\n\n1- Adcionar Aluguel");
         printf("\n2- Listar Imóveis disponiveis");
@@ -168,7 +168,7 @@ int menuAluguel(){
         printf("\nOpção: ");
         fflush(stdin);
         scanf("%d",&i);
-        if(i<0 || i>7)
+        if(i<0 || i>8)
         {
             system("CLS");
             printf("Opção invalida");

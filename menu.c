@@ -63,22 +63,23 @@ int menuclientes(){
 
 int menuListarClientes(){
    int i=100;
-   while(i<0 || i>2){
+   while(i<0 || i>3){
         titulo("Clientes");
         printf("\n\n1- Listar clientes por ordem alfabética");
         printf("\n2- Listar clientes por ordem do NIF");
+        printf("\n3- Listar clientes de um determinado país");
         printf("\n0- Voltar");
         printf("\n------------------------------\n");
         printf("\nOpção: ");
         fflush(stdin);
         scanf("%d",&i);
-        if(i<0 || i>2)
+        if(i<0 || i>3)
         {
             system("CLS"); 
             printf("Opção invalida");
         }
     }
-    if (i==0) return 14;
+    if (i==0) return 1;
     return 140+i;
 }
 

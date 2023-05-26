@@ -196,7 +196,7 @@ int listarClientesAlf(CLIENTE clientes[],int tot)
     printf("Digite qualquer coisa para voltar para o menu anterior\n");
     fflush(stdin);
     scanf("%c",&aux);
-    return 1;
+    return 14;
 }
 
 int listarClientesNif(CLIENTE clientes[],int tot)
@@ -231,5 +231,29 @@ int listarClientesNif(CLIENTE clientes[],int tot)
     printf("Digite qualquer coisa para voltar para o menu anterior\n");
     fflush(stdin);
     scanf("%c",&aux);
-    return 1;
+    return 14;
+}
+
+int filtrarClientePais(CLIENTE clientes[],int tot)
+{
+    char pais[100],res;
+    if(tot==0){
+        printf("\nDeve Inserir clientes antes de usar esta função\n");
+        printf("Digite qualquer coisa para voltar para o menu anterior\n");
+        fflush(stdin);
+        scanf("%c",&res);
+        return 1;
+    }
+    printf("Deseja visualizar os clientes de que pais?\n");fflush(stdin);gets(pais);
+    printf("\n\n\
+    ----------------------------------------\n\
+                Lista de clientes\n\n\
+    ----------------------------------------\n\n\n");
+    for(int i=0;i<tot;i++){
+        if(strcasecmp(pais,clientes[i].pais)==0) listarUmCliente(clientes,i);
+    }
+    printf("Digite qualquer coisa para voltar para o menu anterior\n");
+    fflush(stdin);
+    scanf("%c",&res);
+    return 14;
 }

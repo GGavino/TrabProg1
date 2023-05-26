@@ -45,6 +45,9 @@ int main (int argc, char *argv[]) {
         case 142:
             op=listarClientesNif(clientes,numclientes);
             break;
+        case 143:
+            op=filtrarClientePais(clientes,numclientes);
+            break;
         case 21:
             op=AdicionarImoveis(imoveis,numimoveis);
             numimoveis++;

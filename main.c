@@ -37,7 +37,13 @@ int main (int argc, char *argv[]) {
             guardarclientes(clientes,numclientes);
             break;
         case 14:
-            op=listarTodosClientes(clientes,numclientes);
+            op=menuListarClientes();
+            break;
+         case 141:
+            op=listarClientesAlf(clientes,numclientes);
+            break;
+        case 142:
+            op=listarClientesNif(clientes,numclientes);
             break;
         case 21:
             op=AdicionarImoveis(imoveis,numimoveis);

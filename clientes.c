@@ -161,3 +161,75 @@ void listarUmCliente(CLIENTE clientes[],int id){
     printf("Email: %s\n", clientes[id].email);
     printf("\n--------------------------------------------------\n\n\n");
 }
+
+// ***************************************************************** Alterações *****************************************************************************
+
+int listarClientesAlf(CLIENTE clientes[],int tot)
+{
+    char aux;
+    int menor,ordem[tot],aux1;
+    if(tot==0){
+        printf("\nDeve Inserir clientes antes de usar esta função\n");
+        printf("Digite qualquer coisa para voltar para o menu anterior\n");
+        fflush(stdin);
+        scanf("%c",&aux);
+        return 1;
+    }
+    for(int i=0;i<tot;i++) ordem[i]=i;
+    for(int i=0;i<tot;i++){
+        menor =i;
+        for(int j = i+1; j < tot; j++){
+            if(strcmp(clientes[ordem[j]].nome, clientes[ordem[menor]].nome) < 0)
+            menor = j;
+        }
+        aux1 = ordem[i];
+        ordem[i] = ordem[menor];
+        ordem[menor] = aux1;
+    }
+    printf("\n\n\
+    ----------------------------------------\n\
+                Lista de clientes\n\n\
+    ----------------------------------------\n\n\n");
+    for(int i=0;i<tot;i++){
+        listarUmCliente(clientes,ordem[i]);
+    }
+    printf("Digite qualquer coisa para voltar para o menu anterior\n");
+    fflush(stdin);
+    scanf("%c",&aux);
+    return 1;
+}
+
+int listarClientesNif(CLIENTE clientes[],int tot)
+{
+    char aux;
+    int menor,ordem[tot],aux1;
+    if(tot==0){
+        printf("\nDeve Inserir clientes antes de usar esta função\n");
+        printf("Digite qualquer coisa para voltar para o menu anterior\n");
+        fflush(stdin);
+        scanf("%c",&aux);
+        return 1;
+    }
+    for(int i=0;i<tot;i++) ordem[i]=i;
+    for(int i=0;i<tot;i++){
+        menor =i;
+        for(int j = i+1; j < tot; j++){
+            if(strcmp(clientes[ordem[j]].nif, clientes[ordem[menor]].nif) < 0)
+            menor = j;
+        }
+        aux1 = ordem[i];
+        ordem[i] = ordem[menor];
+        ordem[menor] = aux1;
+    }
+    printf("\n\n\
+    ----------------------------------------\n\
+                Lista de clientes\n\n\
+    ----------------------------------------\n\n\n");
+    for(int i=0;i<tot;i++){
+        listarUmCliente(clientes,ordem[i]);
+    }
+    printf("Digite qualquer coisa para voltar para o menu anterior\n");
+    fflush(stdin);
+    scanf("%c",&aux);
+    return 1;
+}

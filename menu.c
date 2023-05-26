@@ -41,7 +41,7 @@ int menuclientes(){
    int i=100;
    while(i<0 || i>5){
         titulo("Clientes");
-        printf("\n\n1- Adcionar Clientes");
+        printf("\n\n1- Adicionar Clientes");
         printf("\n2- Excluir Clientes");
         printf("\n3- Alterar Clientes");
         printf("\n4- Listar Clientes");
@@ -59,6 +59,27 @@ int menuclientes(){
     }
 
     return 10+i;
+}
+
+int menuListarClientes(){
+   int i=100;
+   while(i<0 || i>2){
+        titulo("Clientes");
+        printf("\n\n1- Listar clientes por ordem alfabética");
+        printf("\n2- Listar clientes por ordem do NIF");
+        printf("\n0- Voltar");
+        printf("\n------------------------------\n");
+        printf("\nOpção: ");
+        fflush(stdin);
+        scanf("%d",&i);
+        if(i<0 || i>2)
+        {
+            system("CLS"); 
+            printf("Opção invalida");
+        }
+    }
+    if (i==0) return 14;
+    return 140+i;
 }
 
 

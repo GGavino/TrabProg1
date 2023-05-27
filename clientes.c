@@ -670,38 +670,27 @@ void alterarClienteTelefone(CLIENTE clientes[], int tot)
     } while (aux != 0);
     do
     {
-        printf("Qual o novo numero de telefone do cliente?\n");
+        printf("Qual o numero de telefone do cliente?\n");
         fflush(stdin);
         gets(clientes[id].telefone);
+        printf("%s\n", clientes[id].telefone);
         aux = 0;
-        for (i = 0; i < tot && aux == 0; i++)
-        {
-
-            if (strcmp(clientes[id].telefone,clientes[i].telefone)==0)
-            {
-                aux=1;
-                printf("Já existe um cliente com esse numero, por favor insira um diferente\n");
-                
-            }
-        }
-        if (strlen(clientes[tot].telefone) != 9)
+        if (strlen(clientes[id].telefone) != 9)
         {
             printf("Numero de telefone invalido, o telefone deve ter 9 numeros\n");
             aux = 1;
         }
         for (i = 0; i < 9 && aux == 0; i++)
         {
-            if (!isdigit(clientes[tot].telefone[i]))
+            if (!isdigit(clientes[id].telefone[i]))
             {
                 printf("Numero de telefone invalido, o telefone deve ter apenas numeros\n");
                 aux = 1;
             }
         }
-
         if (aux != 0)
             printf("\n\n");
     } while (aux != 0);
-
     guardarclientes(clientes, tot);
     printf("\nAs Informações do cliente já foram atualizadas, digite qualquer coisa para continuar: ");
     fflush(stdin);

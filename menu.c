@@ -31,21 +31,19 @@ int menuini(){
         }
     }
     return i;
-
-
-
 }
 
 
 int menuclientes(){
    int i=100;
-   while(i<0 || i>5){
+   while(i<0 || i>6){
         titulo("Clientes");
         printf("\n\n1- Adicionar Clientes");
         printf("\n2- Excluir Clientes");
         printf("\n3- Alterar Clientes");
         printf("\n4- Listar Clientes");
-        printf("\n5- Filtrar Clientes");
+        printf("\n5- Listar Clientes por ordem");
+        printf("\n6- Filtrar Clientes");
         printf("\n0- Voltar");
         printf("\n------------------------------\n");
         printf("\nOpção: ");
@@ -57,30 +55,76 @@ int menuclientes(){
             printf("Opção invalida");
         }
     }
-
     return 10+i;
 }
 
-int menuListarClientes(){
+int menuAlterarClientes(){
    int i=100;
-   while(i<0 || i>3){
-        titulo("Clientes");
-        printf("\n\n1- Listar clientes por ordem alfabética");
-        printf("\n2- Listar clientes por ordem do NIF");
-        printf("\n3- Listar clientes de um determinado país");
+   while(i<0 || i>1){
+        titulo("Alterar Clientes");
+        printf("\n\n1- Alterar telefone");
         printf("\n0- Voltar");
         printf("\n------------------------------\n");
         printf("\nOpção: ");
         fflush(stdin);
         scanf("%d",&i);
-        if(i<0 || i>3)
+        if(i<0 || i>1)
         {
             system("CLS"); 
             printf("Opção invalida");
         }
     }
     if (i==0) return 1;
-    return 140+i;
+    return 130+i;
+}
+
+int menuListarClientesOrdem(){
+   int i=100;
+   while(i<0 || i>5){
+        titulo("Clientes");
+        printf("\n\n1- Listar clientes por ordem alfabética");
+        printf("\n2- Listar clientes por ordem do NIF");
+        printf("\n3- Listar clientes por ordem do País");
+        printf("\n4- Listar clientes por ordem da morada");
+        printf("\n5- Listar clientes por ordem do email");
+        printf("\n0- Voltar");
+        printf("\n------------------------------\n");
+        printf("\nOpção: ");
+        fflush(stdin);
+        scanf("%d",&i);
+        if(i<0 || i>5)
+        {
+            system("CLS"); 
+            printf("Opção invalida");
+        }
+    }
+    if (i==0) return 1;
+    return 150+i;
+}
+
+int menuFiltrarClientes(){
+   int i=100;
+    while(i<0 || i>6){
+        titulo("Filtrar clientes por");
+        printf("\n\n1- País");
+        printf("\n2- Nome");
+        printf("\n3- Nif");
+        printf("\n4- Telefone");
+        printf("\n5- Passaporte");
+        printf("\n6- Email");
+        printf("\n0- Voltar");
+        printf("\n------------------------------\n");
+        printf("\nOpção: ");
+        fflush(stdin);
+        scanf("%d",&i);
+        if(i<0 || i>6)
+        {
+            system("CLS");
+            printf("Opção invalida");
+        }
+    }
+    if (i==0) return 1;
+    return i+160;
 }
 
 

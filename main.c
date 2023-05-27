@@ -36,17 +36,54 @@ int main (int argc, char *argv[]) {
             numclientes++;
             guardarclientes(clientes,numclientes);
             break;
-        case 14:
-            op=menuListarClientes();
+        case 13:
+            op=menuAlterarClientes(clientes,numclientes);
             break;
-         case 141:
+        case 131:
+            alterarClienteTelefone(clientes,numclientes);
+            op = 1;
+            break;
+        case 14:
+            op=listarTodosClientes(clientes,numclientes);
+            break;
+        case 15:
+            op=menuListarClientesOrdem();
+            break;
+        case 151:
             op=listarClientesAlf(clientes,numclientes);
             break;
-        case 142:
+        case 152:
             op=listarClientesNif(clientes,numclientes);
             break;
-        case 143:
+        case 153:
+            op=listarClientesPais(clientes,numclientes);
+            break;
+        case 154:
+            op=listarClientesMorada(clientes,numclientes);
+            break;
+        case 155:
+            op=listarClientesEmail(clientes,numclientes);
+            break;
+        case 16:
+            op=menuFiltrarClientes();
+            break;
+        case 161:
             op=filtrarClientePais(clientes,numclientes);
+            break;
+        case 162:
+            op=filtrarClienteNome(clientes,numclientes);
+            break;
+        case 163:
+            op=filtrarClienteNif(clientes,numclientes);
+            break;
+        case 164:
+            op=filtrarClienteTelefone(clientes,numclientes);
+            break;
+        case 165:
+            op=filtrarClientePassaporte(clientes,numclientes);
+            break;
+        case 166:
+            op=filtrarClienteEmail(clientes,numclientes);
             break;
         case 21:
             op=AdicionarImoveis(imoveis,numimoveis);

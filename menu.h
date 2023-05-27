@@ -6,7 +6,11 @@ int menuimovel(); // O principal menu dos imoveis onde o usuario escolhe oq que 
 
 int menuclientes(); // O principal menu dos cliente onde o usuario escolhe oq que fazer com eles(inserir um novo, alterar ou remover um imovel já existente etc);
 
-int menuListarClientes(); // O menu onde o usuário escolhe o tipo de listagem;
+int menuListarClientesOrdem(); // O menu onde o usuário escolhe a ordem de listagem;
+
+int menuAlterarClientes();// O menu onde o usuário escolhe o que alterar;
+
+int menuFiltrarClientes(); // O menu onde o usuário escolhe o tipo de filtragem;
 
 int menuAluguel(); // O principal menu dos alugueis onde o usuario escolhe oq que fazer com eles(inserir um novo, verificar imoveis diponiveis etc);
 

@@ -4,6 +4,9 @@
 #include "imoveis.h"
 #include "alugueis.h"
 
+
+
+
 int main (int argc, char *argv[]) {
     int op=0,numimoveis=0,numclientes=0;
     CLIENTE clientes[500];
@@ -27,7 +30,6 @@ int main (int argc, char *argv[]) {
         case 2:
             op = menuimovel();
             break;
-
         case 3:
             op=menuAluguel();
             break;
@@ -35,6 +37,8 @@ int main (int argc, char *argv[]) {
             op=AdicionarCliente(clientes,numclientes);
             numclientes++;
             guardarclientes(clientes,numclientes);
+            break;
+        case 12:
             break;
         case 13:
             op=menuAlterarClientes(clientes,numclientes);
@@ -45,6 +49,14 @@ int main (int argc, char *argv[]) {
             break;
         case 132:
             alterarClienteEmail(clientes,numclientes);
+            op = 1;
+            break;
+        case 133:
+            alterarClienteNome(clientes,numclientes);
+            op = 1;
+            break;
+        case 134:
+            alterarClientePais(clientes,numclientes);
             op = 1;
             break;
         case 14:

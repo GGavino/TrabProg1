@@ -754,7 +754,7 @@ void alterarClienteEmail(CLIENTE clientes[], int tot)
         dotcount = 0, acount = 0, dotpos = -1, atpos = -1;
         for (i = 0; i < tot && aux == 0; i++)
         {
-            if (strcmp(novoemail,clientes[i].email)==0)
+            if (strcmp(novoemail, clientes[i].email) == 0)
             {
                 aux = 1;
                 printf("Já existe um cliente com esse email, por favor insira um email diferente!");
@@ -797,6 +797,118 @@ void alterarClienteEmail(CLIENTE clientes[], int tot)
             printf("\n\n");
 
         strcpy(clientes[id].email, novoemail);
+    } while (aux != 0);
+    guardarclientes(clientes, tot);
+    printf("\nAs Informações do cliente já foram atualizadas, digite qualquer coisa para continuar: ");
+    fflush(stdin);
+    scanf("%c", &res);
+}
+
+void alterarClienteNome(CLIENTE clientes[], int tot)
+{
+    int i, id, aux;
+    char res, novonome[100];
+    if (tot == 0)
+    {
+        printf("\nDeve Inserir clientes antes de usar esta função\n");
+        printf("Digite qualquer coisa para voltar para o menu anterior\n");
+        fflush(stdin);
+        scanf("%c", &res);
+        return;
+    }
+    do
+    {
+        printf("Qual o id do cliente que pretende alterar?\n");
+        scanf("%d", &id);
+        if (id < 1 || id > tot)
+            printf("Id invalido, o id deve ser um numero entre 1 e %d\n", tot);
+    } while (id < 1 || id > tot);
+    id--;
+    do
+    {
+        aux = 0;
+        printf("Atualmente o nome do cliente %d é \"%s\", tem certeza que deseja alterar o seu nome?\n", id + 1, clientes[id].nome);
+        fflush(stdin);
+        scanf("%c", &res);
+        if (res == 'N' || res == 'n')
+        {
+            return;
+        }
+        else if (res != 'S' && res != 's')
+        {
+            printf("Resposta invalida\n\n");
+            aux = 1;
+        }
+    } while (aux != 0);
+    do
+    {
+        printf("Qual o novo nome do cliente?\n");
+        fflush(stdin);
+        gets(novonome);
+        printf("%s\n", novonome);
+        aux = 0;
+        for (i = 0; i < tot && aux == 0; i++)
+        {
+            if (strcasecmp(novonome, clientes[i].nome) == 0)
+            {
+                printf("Nome inválido, já em uso!\n");
+                aux = 1;
+            }
+        }
+        if (aux != 0)
+            printf("\n\n");
+
+        strcpy(clientes[id].nome, novonome);
+    } while (aux != 0);
+    guardarclientes(clientes, tot);
+    printf("\nAs Informações do cliente já foram atualizadas, digite qualquer coisa para continuar: ");
+    fflush(stdin);
+    scanf("%c", &res);
+}
+
+void alterarClientePais(CLIENTE clientes[], int tot)
+{
+    int i, id, aux;
+    char res, novopais[100];
+    if (tot == 0)
+    {
+        printf("\nDeve Inserir clientes antes de usar esta função\n");
+        printf("Digite qualquer coisa para voltar para o menu anterior\n");
+        fflush(stdin);
+        scanf("%c", &res);
+        return;
+    }
+    do
+    {
+        printf("Qual o id do cliente que pretende alterar?\n");
+        scanf("%d", &id);
+        if (id < 1 || id > tot)
+            printf("Id invalido, o id deve ser um numero entre 1 e %d\n", tot);
+    } while (id < 1 || id > tot);
+    id--;
+    do
+    {
+        aux = 0;
+        printf("Atualmente o país do cliente %d é \"%s\", tem certeza que deseja alterar o seu país?\n", id + 1, clientes[id].pais);
+        fflush(stdin);
+        scanf("%c", &res);
+        if (res == 'N' || res == 'n')
+        {
+            return;
+        }
+        else if (res != 'S' && res != 's')
+        {
+            printf("Resposta invalida\n\n");
+            aux = 1;
+        }
+    } while (aux != 0);
+    do
+    {
+        printf("Qual o novo nome do país do cliente?\n");
+        fflush(stdin);
+        gets(novopais);
+        printf("%s\n", novopais);
+        strcpy(clientes[id].pais, novopais);
     } while (aux != 0);
     guardarclientes(clientes, tot);
     printf("\nAs Informações do cliente já foram atualizadas, digite qualquer coisa para continuar: ");

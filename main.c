@@ -43,6 +43,10 @@ int main (int argc, char *argv[]) {
             alterarClienteTelefone(clientes,numclientes);
             op = 1;
             break;
+        case 132:
+            alterarClienteEmail(clientes,numclientes);
+            op = 1;
+            break;
         case 14:
             op=listarTodosClientes(clientes,numclientes);
             break;

@@ -60,15 +60,16 @@ int menuclientes(){
 
 int menuAlterarClientes(){
    int i=100;
-   while(i<0 || i>1){
+   while(i<0 || i>2){
         titulo("Alterar Clientes");
         printf("\n\n1- Alterar telefone");
+        printf("\n2- Alterar email");
         printf("\n0- Voltar");
         printf("\n------------------------------\n");
         printf("\nOpção: ");
         fflush(stdin);
         scanf("%d",&i);
-        if(i<0 || i>1)
+        if(i<0 || i>2)
         {
             system("CLS"); 
             printf("Opção invalida");

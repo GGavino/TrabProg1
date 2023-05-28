@@ -13,6 +13,7 @@ int listarClientesPais(CLIENTE clientes[],int tot);// Lista todos os clientes po
 int listarClientesMorada(CLIENTE clientes[],int tot);// Lista todos os clientes por ordem da morada;
 int listarClientesEmail(CLIENTE clientes[],int tot);// Lista todos os clientes por ordem do email;
 void alterarClienteTelefone(CLIENTE clientes[], int tot);// Altera o número de telefone do cliente;
+void alterarClienteEmail(CLIENTE clientes[], int tot);// Altera o email do cliente;
 int filtrarClientePais(CLIENTE clientes[],int tot);// Filtra todos os clientes de um determinado pais;
 int filtrarClienteNome(CLIENTE clientes[],int tot);// Filtra todos os clientes de um determinado usuário;
 int filtrarClienteNif(CLIENTE clientes[],int tot);// Filtra todos os clientes com um determinado nif;

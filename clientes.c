@@ -635,7 +635,7 @@ int filtrarClienteEmail(CLIENTE clientes[], int tot)
 void alterarClienteTelefone(CLIENTE clientes[], int tot)
 {
     int i, id, aux;
-    char res;
+    char res, novotelefone[100];
     if (tot == 0)
     {
         printf("\nDeve Inserir clientes antes de usar esta função\n");
@@ -670,26 +670,133 @@ void alterarClienteTelefone(CLIENTE clientes[], int tot)
     } while (aux != 0);
     do
     {
-        printf("Qual o numero de telefone do cliente?\n");
+        printf("Qual o novo número de telefone do cliente?\n");
         fflush(stdin);
-        gets(clientes[id].telefone);
-        printf("%s\n", clientes[id].telefone);
+        gets(novotelefone);
+        printf("%s\n", novotelefone);
         aux = 0;
-        if (strlen(clientes[id].telefone) != 9)
+        for (i = 0; i < tot && aux == 0; i++)
         {
-            printf("Numero de telefone invalido, o telefone deve ter 9 numeros\n");
+            if (strcmp(novotelefone, clientes[i].telefone) == 0)
+            {
+                printf("Telefone inválido, já em uso!\n");
+                aux = 1;
+            }
+        }
+        if (strlen(novotelefone) != 9)
+        {
+            printf("Numero de telefone inválido, o telefone deve ter 9 numeros!\n");
             aux = 1;
         }
         for (i = 0; i < 9 && aux == 0; i++)
         {
-            if (!isdigit(clientes[id].telefone[i]))
+            if (!isdigit(novotelefone[i]))
             {
-                printf("Numero de telefone invalido, o telefone deve ter apenas numeros\n");
+                printf("Numero de telefone inválido, o telefone deve ter apenas numeros!\n");
                 aux = 1;
             }
         }
         if (aux != 0)
             printf("\n\n");
+
+        strcpy(clientes[id].telefone, novotelefone);
+
+    } while (aux != 0);
+    guardarclientes(clientes, tot);
+    printf("\nAs Informações do cliente já foram atualizadas, digite qualquer coisa para continuar: ");
+    fflush(stdin);
+    scanf("%c", &res);
+}
+
+void alterarClienteEmail(CLIENTE clientes[], int tot)
+{
+    int i = 0, aux = 0, id, dotcount, acount, atpos, dotpos;
+    char res, novoemail[100];
+    if (tot == 0)
+    {
+        printf("\nDeve Inserir clientes antes de usar esta função\n");
+        printf("Digite qualquer coisa para voltar para o menu anterior\n");
+        fflush(stdin);
+        scanf("%c", &res);
+        return;
+    }
+    do
+    {
+        printf("Qual o id do cliente que pretende alterar?\n");
+        scanf("%d", &id);
+        if (id < 1 || id > tot)
+            printf("Id invalido, o id deve ser um numero entre 1 e %d\n", tot);
+    } while (id < 1 || id > tot);
+    id--;
+    do
+    {
+        aux = 0;
+        printf("Atualmente o email do cliente %d é \"%s\", tem certeza que deseja alterar o seu email?\n", id + 1, clientes[id].email);
+        fflush(stdin);
+        scanf("%c", &res);
+        if (res == 'N' || res == 'n')
+        {
+            return;
+        }
+        else if (res != 'S' && res != 's')
+        {
+            printf("Resposta invalida\n\n");
+            aux = 1;
+        }
+    } while (aux != 0);
+    do
+    {
+        printf("Qual o novo email do cliente?\n");
+        fflush(stdin);
+        gets(novoemail);
+        printf("%s\n", novoemail);
+        aux = 0;
+        dotcount = 0, acount = 0, dotpos = -1, atpos = -1;
+        for (i = 0; i < tot && aux == 0; i++)
+        {
+            if (strcmp(novoemail,clientes[i].email)==0)
+            {
+                aux = 1;
+                printf("Já existe um cliente com esse email, por favor insira um email diferente!");
+            }
+        }
+        for (i = 0; i < strlen(novoemail); i++)
+        {
+            if (novoemail[i] == '@')
+            {
+                acount++;
+                atpos = i;
+            }
+            else if (novoemail[i] == '.')
+            {
+                dotcount++;
+                dotpos = i;
+            }
+        }
+        if (strlen(novoemail) < 5)
+        {
+            aux = 1;
+            printf("O email deve ter pelo menos 5 caracteres");
+        }
+        else if (isdigit(novoemail[0]))
+        {
+            printf("O primeiro caractere do email n pode ser um numero");
+            aux = 1;
+        }
+        else if (dotcount == 0 || acount != 1)
+        {
+            printf("O email deve ter exatamente um '@' e pelo menos 1 '.'");
+            aux = 1;
+        }
+        else if (dotpos == atpos + 1 || dotpos < atpos)
+        {
+            printf("Deve have pelo menos um caracter entre o '@' e o '.' e deve haver 1 '.' depois do '@'");
+            aux = 1;
+        }
+        if (aux != 0)
+            printf("\n\n");
+
+        strcpy(clientes[id].email, novoemail);
     } while (aux != 0);
     guardarclientes(clientes, tot);
     printf("\nAs Informações do cliente já foram atualizadas, digite qualquer coisa para continuar: ");

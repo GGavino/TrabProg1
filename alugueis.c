@@ -32,7 +32,9 @@ int AdicionarAluguel(IMOVEL imoveis[], int tot,int totclientes){
     do{
         res=0;
         printf("Qual o id do Imóvel ao qual este aluguel pertence?\n");fflush(stdin);res=scanf("%d",&id);
+        if(res!=1) printf("Reposta invalida\n");
     }while(res!=1 || id < 1 || id > tot); // verifica se o id foi lido de maneira correta e se o mesmo é valido
+    id--;
     do{
         res=0;
         printf("Qual o id do Cliente ao qual este aluguel pertence?\n");res=scanf("%d",&aux.clientid);
@@ -45,8 +47,9 @@ int AdicionarAluguel(IMOVEL imoveis[], int tot,int totclientes){
         if(res != 3) printf("Resposta invalida\n\n");
         passou=0,repetido=0;
         for(aux2=imoveis[id].alugueis; aux2 != NULL && passou == 0 && repetido == 0; aux2 = aux2->proximo){
-            if(comparardatas(aux2->data.inicio,aux.inicio) > 0 && comparardatas(aux2->data.fim,aux.fim) < 0 ){
+            if(comparardatas(aux2->data.inicio,aux.inicio) >= 0 && comparardatas(aux2->data.fim,aux.inicio) <= 7){
                 repetido = 1;
+                printf("O aluguel não esta disponivel nesta data");
             } else if(comparardatas(aux2->data.inicio,aux.inicio) < 0){
                 passou = 1;
             }
@@ -66,8 +69,9 @@ int AdicionarAluguel(IMOVEL imoveis[], int tot,int totclientes){
         }
         printf("%d",comparardatas(aux.inicio,aux.fim));
         for(aux2=imoveis[id].alugueis; aux2 != NULL && passou == 0 && repetido == 0; aux2 = aux2->proximo){
-            if(comparardatas(aux2->data.inicio,aux.fim) > 0 && comparardatas(aux2->data.fim,aux.fim) < 0 ){
+            if(comparardatas(aux2->data.inicio,aux.fim) >= 0 && comparardatas(aux2->data.fim,aux.fim) <= 0 || (comparardatas(aux.inicio,aux2->data.inicio) >= 0 && comparardatas(aux.fim,aux2->data.inicio) <= 0) ){
                 repetido = 1;
+                printf("O aluguel não esta disponivel nesta data");
             } else if(comparardatas(aux2->data.inicio,aux.fim) < 0){
                 passou = 1;
             }

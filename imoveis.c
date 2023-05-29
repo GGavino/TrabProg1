@@ -62,6 +62,14 @@ int removerImoveis(IMOVEL imoveis[],int tot){
     int id,aux;
     char res;
     AluguelList *aux2=NULL,*aux3=NULL;
+    if (tot == 0)
+    {
+        printf("\nDeve Inserir imóveis antes de usar esta função\n");
+        printf("Digite qualquer coisa para voltar para o menu anterior\n");
+        fflush(stdin);
+        scanf("%c", &aux);
+        return 1;
+    }
     do{
         printf("Qual o id do Imóvel que pretende remover?\n");
         scanf("%d",&id);

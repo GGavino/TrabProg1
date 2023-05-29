@@ -122,14 +122,23 @@ void removerAlugueisDoCliente(IMOVEL imoveis[],int tot, int id){
         for(aux = imoveis[i].alugueis->proximo; aux->proximo != NULL; aux=aux->proximo) {
             aux2 = aux->anterior;
             if(aux2->data.clientid == id ) {
+                aux2->proximo->anterior=aux2->anterior;
+                aux2->anterior->proximo=aux2->proximo;
+                imoveis[i].totalugueis--;
                 free(aux2);
             }else if(aux2->data.clientid > id) aux2->data.clientid--;
         }
         aux2 = aux->anterior;
         if(aux2->data.clientid == id ) {
+            aux2->proximo->anterior=aux2->anterior;
+            aux2->anterior->proximo=aux2->proximo;
+            imoveis[i].totalugueis--;
             free(aux2);
         }else if(aux2->data.clientid > id) aux2->data.clientid--;
         if(aux->data.clientid == id ) {
+            aux->proximo->anterior=aux->anterior;
+            aux->anterior->proximo=aux->proximo;
+            imoveis[i].totalugueis--;
             free(aux);
          }else if(aux->data.clientid > id) aux->data.clientid--;
     }

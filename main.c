@@ -39,6 +39,8 @@ int main (int argc, char *argv[]) {
             guardarclientes(clientes,numclientes);
             break;
         case 12:
+            op=deletarCliente(imoveis,numimoveis,clientes,numclientes);
+            numclientes--;
             break;
         case 13:
             op=menuAlterarClientes(clientes,numclientes);

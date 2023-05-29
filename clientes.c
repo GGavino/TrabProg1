@@ -242,6 +242,36 @@ void listarUmCliente(CLIENTE clientes[], int id)
 ******************************************************************************** MUDANÇAS**************************************************************************************
 ******************************************************************************************************************************************************************************/
 
+
+// ******************************************************************************DELETAR*************************************************************************************
+
+
+int deletarCliente(IMOVEL imoveis[], int totimo,CLIENTE clientes[], int tot)
+{
+    char aux;
+    int id;
+    if (tot == 0)
+    {
+        printf("\nDeve Inserir clientes antes de usar esta função\n");
+        printf("Digite qualquer coisa para voltar para o menu anterior\n");
+        fflush(stdin);
+        scanf("%c", &aux);
+        return 1;
+    }
+    do{
+        printf("Qual o id do cliente que pretende remover?\n");
+        scanf("%d",&id);
+        if(id < 1 || id > tot) printf("Id invalido, o id deve ser um numero entre 1 e %d\n", tot);
+    }while(id < 1 || id > tot);
+    id--;
+    for(int i = id; i < tot; i++){
+        clientes[i] = clientes[i+1];
+    }
+    removerAlugueisDoCliente(imoveis,totimo,id);
+    
+}
+
+
 // ******************************************************************************ORDENAÇÃO*************************************************************************************
 
 int listarClientesAlf(CLIENTE clientes[], int tot)
